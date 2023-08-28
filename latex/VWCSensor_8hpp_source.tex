@@ -1,0 +1,25 @@
+\doxysection{VWCSensor.\+hpp}
+\hypertarget{VWCSensor_8hpp_source}{}\label{VWCSensor_8hpp_source}\index{include/VWCSensor.hpp@{include/VWCSensor.hpp}}
+\mbox{\hyperlink{VWCSensor_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#ifndef\ VWC\_SENSOR\_H}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ VWC\_SENSOR\_H}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVWCSensor}{VWCSensor}}\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ SoilMedia\ \{MINERAL\_SOIL,\ SOILLESS\};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classVWCSensor_abf12dc2604d29ebbb67acf10ef00b6ab}{getVWC}}(SoilMedia\ media,\ \textcolor{keywordtype}{double}\ voltage);\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classVWCSensor_a92a5fd826886da4f7961193daeaaf82e}{getSensorType}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classVWCSensor_a26734d5d7a7dfc050e16fc38c4c49f2d}{toJSON}}(\textcolor{keywordtype}{double}\ voltage);\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

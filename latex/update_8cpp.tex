@@ -1,0 +1,137 @@
+\doxysection{include/update.cpp File Reference}
+\hypertarget{update_8cpp}{}\label{update_8cpp}\index{include/update.cpp@{include/update.cpp}}
+
+
+Defines utilities for managing firmware updates, using Over-\/\+The-\/\+Air updates.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi\+Multi.\+h$>$}\newline
+{\ttfamily \#include $<$HTTPClient.\+h$>$}\newline
+{\ttfamily \#include $<$HTTPUpdate.\+h$>$}\newline
+{\ttfamily \#include $<$tinyxml2.\+h$>$}\newline
+{\ttfamily \#include $<$MQTTMailer.\+hpp$>$}\newline
+Include dependency graph for update.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{update_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{update_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{update_8cpp_adfcee2bc2c9061968f9738d7ddf0a396}\label{update_8cpp_adfcee2bc2c9061968f9738d7ddf0a396} 
+\#define {\bfseries OTA\+\_\+\+SERVER}~"{}192.\+168.\+50.\+10"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{update_8cpp_a9b133af72f24d9221d811ae375854631}{new\+\_\+firmware\+\_\+version\+\_\+available}} ()
+\begin{DoxyCompactList}\small\item\em Check if server has different firmware version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{update_8cpp_a59d61902e825ebabe0a2259ba8e906ac}{update\+\_\+progress}} (int cur, int total)
+\begin{DoxyCompactList}\small\item\em Prints update process progress to the serial interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{update_8cpp_ac30dfa0188e237f4ae0f983a8dd84888}{update\+\_\+started}} ()
+\begin{DoxyCompactList}\small\item\em Send status message to the MQTT broker that the update process started. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{update_8cpp_a4ab67b93fc9ac13fed541d66e044a039}{update\+\_\+finished}} ()
+\begin{DoxyCompactList}\small\item\em Log update process finished. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{update_8cpp_a91745750976b456ed74139d5c6a07473}{update\+\_\+error}} (int err)
+\begin{DoxyCompactList}\small\item\em Log update process errored out. \end{DoxyCompactList}\item 
+\Hypertarget{update_8cpp_ac73e1e13b3305f391b3319037813e9b0}\label{update_8cpp_ac73e1e13b3305f391b3319037813e9b0} 
+void {\bfseries attempt\+\_\+update} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\+\_\+\+DEBUG}}
+\item 
+\Hypertarget{update_8cpp_a965861de1a367ef4c2b467de34de2683}\label{update_8cpp_a965861de1a367ef4c2b467de34de2683} 
+Pub\+Sub\+Client {\bfseries mqtt\+\_\+client}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines utilities for managing firmware updates, using Over-\/\+The-\/\+Air updates. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{update_8cpp_a9b133af72f24d9221d811ae375854631}\label{update_8cpp_a9b133af72f24d9221d811ae375854631} 
+\index{update.cpp@{update.cpp}!new\_firmware\_version\_available@{new\_firmware\_version\_available}}
+\index{new\_firmware\_version\_available@{new\_firmware\_version\_available}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{new\_firmware\_version\_available()}{new\_firmware\_version\_available()}}
+{\footnotesize\ttfamily string new\+\_\+firmware\+\_\+version\+\_\+available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if server has different firmware version. 
+
+Accesses the server using the IP address defined by OTA\+\_\+\+SERVER. If the server hosted version of doesn\textquotesingle{}t match then the firmware file name is retrieved and the file downloaded from the server.
+
+Status messages are logged to serial and the MQTT broker if possible. \Hypertarget{update_8cpp_a91745750976b456ed74139d5c6a07473}\label{update_8cpp_a91745750976b456ed74139d5c6a07473} 
+\index{update.cpp@{update.cpp}!update\_error@{update\_error}}
+\index{update\_error@{update\_error}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{update\_error()}{update\_error()}}
+{\footnotesize\ttfamily void update\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{err }\end{DoxyParamCaption})}
+
+
+
+Log update process errored out. 
+
+Notifies the MQTT broker and prints the update error message to the serial line. The message on the serial port will contain the HTTP error code. Logging error code is not included in MQTT message since most likely failure is connection. \Hypertarget{update_8cpp_a4ab67b93fc9ac13fed541d66e044a039}\label{update_8cpp_a4ab67b93fc9ac13fed541d66e044a039} 
+\index{update.cpp@{update.cpp}!update\_finished@{update\_finished}}
+\index{update\_finished@{update\_finished}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{update\_finished()}{update\_finished()}}
+{\footnotesize\ttfamily void update\+\_\+finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Log update process finished. 
+
+Notifies the MQTT broker and prints the update finished message to the serial line. \Hypertarget{update_8cpp_a59d61902e825ebabe0a2259ba8e906ac}\label{update_8cpp_a59d61902e825ebabe0a2259ba8e906ac} 
+\index{update.cpp@{update.cpp}!update\_progress@{update\_progress}}
+\index{update\_progress@{update\_progress}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{update\_progress()}{update\_progress()}}
+{\footnotesize\ttfamily void update\+\_\+progress (\begin{DoxyParamCaption}\item[{int}]{cur,  }\item[{int}]{total }\end{DoxyParamCaption})}
+
+
+
+Prints update process progress to the serial interface. 
+
+Prints number of bytes downloaded out of the total file size to serial interface, but only if the USB\+\_\+\+DEBUG flag is set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cur} & bytes downloaded so far \\
+\hline
+{\em total} & total file size in bytes \\
+\hline
+\end{DoxyParams}
+\Hypertarget{update_8cpp_ac30dfa0188e237f4ae0f983a8dd84888}\label{update_8cpp_ac30dfa0188e237f4ae0f983a8dd84888} 
+\index{update.cpp@{update.cpp}!update\_started@{update\_started}}
+\index{update\_started@{update\_started}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{update\_started()}{update\_started()}}
+{\footnotesize\ttfamily void update\+\_\+started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Send status message to the MQTT broker that the update process started. 
+
+Notifies MQTT broker and prints to the serial interface that the device has begun updating from the server hosted file. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}\label{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50} 
+\index{update.cpp@{update.cpp}!USB\_DEBUG@{USB\_DEBUG}}
+\index{USB\_DEBUG@{USB\_DEBUG}!update.cpp@{update.cpp}}
+\doxysubsubsection{\texorpdfstring{USB\_DEBUG}{USB\_DEBUG}}
+{\footnotesize\ttfamily const bool USB\+\_\+\+DEBUG\hspace{0.3cm}{\ttfamily [extern]}}
+
+Serial debug enable flag, set in config.\+h 

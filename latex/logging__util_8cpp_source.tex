@@ -1,0 +1,181 @@
+\doxysection{logging\+\_\+util.\+cpp}
+\hypertarget{logging__util_8cpp_source}{}\label{logging__util_8cpp_source}\index{include/logging\_util.cpp@{include/logging\_util.cpp}}
+\mbox{\hyperlink{logging__util_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <Preferences.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <NTPClient.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <TimeStamp.hpp>}\ \ \ \ \textcolor{comment}{//\ functions\ for\ formatting\ time\ stamps}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <SDLogger.hpp>}\ \ \ \ \ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <SDReader.hpp>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ interface\ to\ NVM\ access}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{extern}\ Preferences\ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}};}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{bool}\ logging\_available\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{bool}\ absolute\_timestamp\_available\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{bool}\ logged\_relative\_data\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ std::string\ time\_stamp\_to\_cache\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ SDLogger\ }}
+\DoxyCodeLine{00027\ SDLogger*\ logger\ =\ NULL;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ reads\ and\ writes\ to\ files}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ TimeStamp}}
+\DoxyCodeLine{00029\ TimeStampBuilder*\ tsb\ =\ NULL;\ \ \ \textcolor{comment}{//\ builds\ timestamp\ strings}}
+\DoxyCodeLine{00030\ TimeStampParser*\ tsp\ =\ NULL;\ \ \ \ \textcolor{comment}{//\ parses\ timestamp\ strings}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ uSD\ Utilities}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//bool\ is\_sd\_attached(void);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //\ check\ if\ there\ is\ an\ sd\ card\ connected}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ TimeStamp\ Utilities}}
+\DoxyCodeLine{00036\ std::string\ \mbox{\hyperlink{logging__util_8cpp_a27e949dc420cd22ef8c220d82cc8259f}{cache\_retrieve\_timestamp}}();\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ return\ the\ last\ timestamp\ as\ a\ string}}
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_a84557373ab4c41663554890c5589bc3c}{cache\_timestamp}}(std::string\ timestamp);\ \ \ \ \textcolor{comment}{//\ save\ the\ current\ timestamp\ to\ NVM}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Logging\ Utilities}}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{logging__util_8cpp_ae48655ee393afdbed2a929b09c9a724a}{init\_data\_logger}}();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ perform\ all\ initialization\ that\ MUST\ happen\ before\ logging}}
+\DoxyCodeLine{00041\ std::string\ \mbox{\hyperlink{logging__util_8cpp_a55a2c93667516d15e039732826250596}{get\_log\_filename}}(TimeStampParser*);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ build\ the\ log\ filename\ from\ timestamp}}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(std::string\ filename,\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::string\ time,\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::string\ topic,\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::string\ message);\ \textcolor{comment}{//\ log\ an\ mqtt\ message\ to\ the\ sd\ card}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{logging__util_8cpp_ae48655ee393afdbed2a929b09c9a724a}{init\_data\_logger}}()\{}
+\DoxyCodeLine{00058\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[DEBUG]\ initializing\ new\ SDLogger"{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ initialize\ SDLogger}}
+\DoxyCodeLine{00060\ \ \ \ \ logger\ =\ \textcolor{keyword}{new}\ SDLogger();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ check\ if\ the\ uSD\ card\ is\ connected}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{if}(!logger-\/>initialize\_sd\_card())\{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00065\ \ \ \ \ \}\ \ \ \ \ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ retrieve\ latest\ timestamp}}
+\DoxyCodeLine{00068\ \ \ \ \ std::string\ ts\ =\ \mbox{\hyperlink{logging__util_8cpp_a27e949dc420cd22ef8c220d82cc8259f}{cache\_retrieve\_timestamp}}();}
+\DoxyCodeLine{00069\ \ \ \ \ std::string\ fn\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00070\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ retrieved\ cached\ timestamp\ -\/>\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ ts.c\_str());}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{if}(ts\ !=\ \textcolor{stringliteral}{"{}"{}}\ \&\&\ !absolute\_timestamp\_available)\{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ there\ was\ a\ cached\ timestamp}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ no\ absolute\ timestamp\ from\ NTP\ available}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ therefore,}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ use\ cached\ timestamp}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ tsp\ =\ \textcolor{keyword}{new}\ TimeStampParser(ts);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ generate\ log\ filename}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ fn\ =\ \mbox{\hyperlink{logging__util_8cpp_a55a2c93667516d15e039732826250596}{get\_log\_filename}}(tsp);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(absolute\_timestamp\_available)\{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ absolute\ timestamp\ to\ initialize}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ tsp\ =\ \textcolor{keyword}{new}\ TimeStampParser(tsb-\/>get\_date\_time());}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ using\ absolute\ timestamp\ -\/>\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ tsp-\/>get\_timestamp().c\_str());}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ fn\ =\ \mbox{\hyperlink{logging__util_8cpp_a55a2c93667516d15e039732826250596}{get\_log\_filename}}(tsp);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ no\ cached\ timestamp}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ no\ absolute\ timestamp}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ therefore,}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ set\ to\ default\ log\ file\ name}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ fn\ =\ \textcolor{stringliteral}{"{}/log"{}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ timestamp\ to\ default\ value}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ tsp\ =\ \textcolor{keyword}{new}\ TimeStampParser(\textcolor{stringliteral}{"{}00-\/00-\/00T00:00:00+0"{}});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ using\ default\ timestamp\ -\/>\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ tsp-\/>get\_timestamp().c\_str());}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ ready\ to\ rock!}}
+\DoxyCodeLine{00098\ \ \ \ \ logger-\/>set\_filename(fn\ +\ \textcolor{stringliteral}{"{}.csv"{}});}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00101\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00109\ std::string\ \mbox{\hyperlink{logging__util_8cpp_a55a2c93667516d15e039732826250596}{get\_log\_filename}}(TimeStampParser*\ tsp)\{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{if}(tsp\ ==\ NULL)\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ std::string\ filename\ =\ \textcolor{stringliteral}{"{}/log\_"{}}\ +\ std::to\_string(tsp-\/>get\_month())\ +\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/"{}}\ +\ std::to\_string(tsp-\/>get\_day())\ +\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/"{}}\ +\ std::to\_string(tsp-\/>get\_year());}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{return}\ filename;}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_a84557373ab4c41663554890c5589bc3c}{cache\_timestamp}}(std::string\ timestamp)\{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//\ cache\ string\ }}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.putString(\textcolor{stringliteral}{"{}timestamp"{}},\ timestamp.c\_str());}
+\DoxyCodeLine{00128\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00135\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_aa0288d721e9a933c0494590b09c7d810}{cache\_log\_offset}}(\textcolor{keywordtype}{int}\ log\_offset)\{}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.putInt(\textcolor{stringliteral}{"{}log\_offset"{}},\ log\_offset);}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00148\ std::string\ \mbox{\hyperlink{logging__util_8cpp_a27e949dc420cd22ef8c220d82cc8259f}{cache\_retrieve\_timestamp}}()\{}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.isKey(\textcolor{stringliteral}{"{}timestamp"{}}))\{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ return\ empty\ string,\ because\ it\ doesn't}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ exist\ }}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[WARNING]\ key\ \(\backslash\)'timestamp\(\backslash\)'\ doesn't\ exist"{}});}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.putString(\textcolor{stringliteral}{"{}timestamp"{}},\ \ \textcolor{stringliteral}{"{}00-\/00-\/00T00:00:00+0"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00155\ \ \ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.getString(\textcolor{stringliteral}{"{}timestamp"{}},\ \textcolor{stringliteral}{"{}"{}}).c\_str();}
+\DoxyCodeLine{00158\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00165\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{logging__util_8cpp_abc8f9c3ac6f2042bc5fc8660063aad5e}{cache\_retrieve\_log\_offset}}(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}(!\mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.isKey(\textcolor{stringliteral}{"{}log\_offset"{}}))\{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[WARNING]\ key\ \(\backslash\)'log\_offset\(\backslash\)'\ doesn't\ exist"{}});}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.putInt(\textcolor{stringliteral}{"{}log\_offset"{}},\ 0);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{logging__util_8cpp_add9553c173198049d23f8a89fe11142c}{gator\_prefs}}.getInt(\textcolor{stringliteral}{"{}log\_offset"{}},\ 0);}
+\DoxyCodeLine{00173\ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00184\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(std::string\ filename,\ std::string\ time,\ std::string\ topic,\ std::string\ message)\{}
+\DoxyCodeLine{00185\ \ \ \ \ std::string\ log\_fn\ =\ filename;}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}})\{}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[SDLogger]\ logging\ to\ \(\backslash\)'\%s\(\backslash\)n\(\backslash\)'"{}},\ log\_fn);}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ logger\ =\ \textcolor{keyword}{new}\ SDLogger(log\_fn);}
+\DoxyCodeLine{00191\ \ \ \ \ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{comment}{//\ Write\ headers\ if\ file\ doesn't\ already\ exist}}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{if}(!logger-\/>exists(filename))\{}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ std::vector<std::string>\ header\_fields;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}TIME"{}});}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}MQTT\ TOPIC"{}});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}MQTT\ MESSAGE"{}});}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ logger-\/>write\_header(header\_fields);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{//\ generate\ timestamp}}
+\DoxyCodeLine{00205\ \ \ \ \ std::string\ ts\ =\ tsb-\/>get\_date\_time();}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{comment}{//\ log\ as\ absolute,\ trust\ user\ to\ have\ }}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{//\ \ generated\ the\ timestamp\ they\ wanted}}
+\DoxyCodeLine{00209\ \ \ \ \ logger-\/>log\_absolute\_mqtt(time,\ topic,\ message);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{comment}{//logger-\/>close\_card();}}
+\DoxyCodeLine{00212\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00228\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(SDLogger*\ l,\ std::string\ time,\ std::string\ topic,\ std::string\ message)\{}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ \ if(DEBUG)\{}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ \ \ \ \ \ Serial.printf("{}[SDLogger]\ logging\ to\ \(\backslash\)'\%s\(\backslash\)n\(\backslash\)'"{},\ log\_fn);}}
+\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00233\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{if}(!l-\/>exists())\{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ std::vector<std::string>\ header\_fields;}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}TIME"{}});}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}MQTT\ TOPIC"{}});}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ header\_fields.push\_back(\textcolor{stringliteral}{"{}MQTT\ MESSAGE"{}});}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ l-\/>write\_header(header\_fields);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//\ log\ as\ absolute,\ trust\ user\ to\ have\ }}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//\ \ generated\ the\ timestamp\ they\ wanted}}
+\DoxyCodeLine{00247\ \ \ \ \ l-\/>log\_absolute\_mqtt(time,\ topic,\ message);}
+\DoxyCodeLine{00248\ \}}
+
+\end{DoxyCode}

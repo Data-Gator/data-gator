@@ -1,0 +1,245 @@
+\doxysection{SDCard Class Reference}
+\hypertarget{classSDCard}{}\label{classSDCard}\index{SDCard@{SDCard}}
+
+
+Thin wrapper around ESP32 SD card API.  
+
+
+
+
+{\ttfamily \#include $<$SDCard.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} = fs\+::\+File
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSDCard_a491caa7cfdbfdf607741662800da2df5}{operator bool}} () const
+\item 
+bool \mbox{\hyperlink{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a}{begin}} (uint8\+\_\+t clk\+Pin=\mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}, uint8\+\_\+t miso\+Pin=TT\+\_\+\+MISO, uint8\+\_\+t mosi\+Pin=TT\+\_\+\+MOSI, uint8\+\_\+t ss\+Pin=TT\+\_\+\+SS, SPIClass \texorpdfstring{$\ast$}{*}spi=\&SPI)
+\item 
+\Hypertarget{classSDCard_a0bdc567fbef656f62ba606fa7fb1271b}\label{classSDCard_a0bdc567fbef656f62ba606fa7fb1271b} 
+void {\bfseries end} ()
+\begin{DoxyCompactList}\small\item\em Terminate connection to SD Card and associated SPI interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} \mbox{\hyperlink{classSDCard_ac582420a0decb16dd633f1d89fb95e9f}{open}} (const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}mode=FILE\+\_\+\+READ, const bool create=false)
+\item 
+\Hypertarget{classSDCard_a6072cf673390abc56604eec67f2afd8d}\label{classSDCard_a6072cf673390abc56604eec67f2afd8d} 
+\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} {\bfseries open} (const String \&path, const char \texorpdfstring{$\ast$}{*}mode=FILE\+\_\+\+READ, const bool create=false)
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSDCard_a1f63ff5b2073e8bdbd1aa7a36ccbaad1}{exists}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+\Hypertarget{classSDCard_af632e8b1ed377c339f88d6dd92b55424}\label{classSDCard_af632e8b1ed377c339f88d6dd92b55424} 
+bool {\bfseries exists} (const String \&path)
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSDCard_aa79e66efab6a35751ab76e9beb228dc4}{remove}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+\Hypertarget{classSDCard_a207becca74cd61785655631d38de3774}\label{classSDCard_a207becca74cd61785655631d38de3774} 
+bool {\bfseries remove} (const String \&path)
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSDCard_a144e869ec9090712af70cc724b4d0c56}{rename}} (const char \texorpdfstring{$\ast$}{*}path\+From, const char \texorpdfstring{$\ast$}{*}path\+To)
+\item 
+\Hypertarget{classSDCard_ab4f61d542bb1df1349bf7ceea814efbb}\label{classSDCard_ab4f61d542bb1df1349bf7ceea814efbb} 
+bool {\bfseries rename} (const String \&path\+From, const String \&path\+To)
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSDCard_ab1c42bab450f6cefe48108c822224783}{mkdir}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+\Hypertarget{classSDCard_af8082646331f9d228b0ec59302c1cd9d}\label{classSDCard_af8082646331f9d228b0ec59302c1cd9d} 
+bool {\bfseries mkdir} (const String \&path)
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSDCard_a207de663a509e1bd081374dcf5fd02e8}{rmdir}} (const char \texorpdfstring{$\ast$}{*}path)
+\item 
+\Hypertarget{classSDCard_a0ed6f3a3cdaf7c4d40f316d534352d91}\label{classSDCard_a0ed6f3a3cdaf7c4d40f316d534352d91} 
+bool {\bfseries rmdir} (const String \&path)
+\end{DoxyCompactItemize}
+
+
+
+\doxysubsection{Detailed Description}
+Thin wrapper around ESP32 SD card API. 
+
+Only works with ESP32 Arduino framework
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Future versions should support other platforms/frameworks. \end{DoxyRefDesc}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}\label{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5} 
+\index{SDCard@{SDCard}!File@{File}}
+\index{File@{File}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{File}{File}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{SDCard\+::\+File}} =  fs\+::\+File}
+
+File implements close(), read(), write(), fs implements open, etc. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a}\label{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a} 
+\index{SDCard@{SDCard}!begin@{begin}}
+\index{begin@{begin}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily bool SDCard\+::begin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{clk\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}},  }\item[{uint8\+\_\+t}]{miso\+Pin = {\ttfamily TT\+\_\+MISO},  }\item[{uint8\+\_\+t}]{mosi\+Pin = {\ttfamily TT\+\_\+MOSI},  }\item[{uint8\+\_\+t}]{ss\+Pin = {\ttfamily TT\+\_\+SS},  }\item[{SPIClass \texorpdfstring{$\ast$}{*}}]{spi = {\ttfamily \&SPI} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function to connect to an SD card using the specified pins and SPI interface.
+
+For more information on SPI \href{https://en.wikipedia.org/wiki/Serial_Peripheral_Interface}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Serial\+\_\+\+Peripheral\+\_\+\+Interface}} ESP32 docs \href{https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html}{\texttt{ https\+://docs.\+espressif.\+com/projects/esp-\/idf/en/latest/esp32/api-\/reference/peripherals/spi\+\_\+master.\+html}} 
+\begin{DoxyParams}{Parameters}
+{\em clk\+Pin} & -\/ GPIO pin that provides the clock signal. \\
+\hline
+{\em miso\+Pin} & -\/ Master in slave out pin. \\
+\hline
+{\em mosi\+Pin} & -\/ Master out slave in pin. \\
+\hline
+{\em ss\+Pin} & -\/ Chip/\+Save select. \\
+\hline
+{\em spi} & -\/ Pointer to SPI interface.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if interface setup worked false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_a1f63ff5b2073e8bdbd1aa7a36ccbaad1}\label{classSDCard_a1f63ff5b2073e8bdbd1aa7a36ccbaad1} 
+\index{SDCard@{SDCard}!exists@{exists}}
+\index{exists@{exists}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{exists()}{exists()}}
+{\footnotesize\ttfamily bool SDCard\+::exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check to see if path exists.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to file or directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if path exists false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_ab1c42bab450f6cefe48108c822224783}\label{classSDCard_ab1c42bab450f6cefe48108c822224783} 
+\index{SDCard@{SDCard}!mkdir@{mkdir}}
+\index{mkdir@{mkdir}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{mkdir()}{mkdir()}}
+{\footnotesize\ttfamily bool SDCard\+::mkdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Create a directory
+
+If directory doesn\textquotesingle{}t exist it will be created.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to directory to create. Naming conventions are the same as for files. For example "{}\textbackslash{}testdir"{} will be in the root of the device.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if path was created false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_ac582420a0decb16dd633f1d89fb95e9f}\label{classSDCard_ac582420a0decb16dd633f1d89fb95e9f} 
+\index{SDCard@{SDCard}!open@{open}}
+\index{open@{open}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} SDCard\+::open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{mode = {\ttfamily FILE\+\_\+READ},  }\item[{const bool}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Open and possibly create a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Name of file. This API uses the 8.\+3 DOS file name rules. The full path of the file needs to be specified. Files in the root of the device will requre a "{}/"{}. For example "{}/test.\+txt"{}. \\
+\hline
+{\em mode} & "{}w"{}, "{}r"{}, "{}a"{}. Simple C style modes. \\
+\hline
+{\em create} & If true allows creation of the file. true is implied if mode is "{}w"{}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+File interface. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_a491caa7cfdbfdf607741662800da2df5}\label{classSDCard_a491caa7cfdbfdf607741662800da2df5} 
+\index{SDCard@{SDCard}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily SDCard\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Operator to test if properly initialized. \begin{DoxyReturn}{Returns}
+true if connected to the SD interface. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_aa79e66efab6a35751ab76e9beb228dc4}\label{classSDCard_aa79e66efab6a35751ab76e9beb228dc4} 
+\index{SDCard@{SDCard}!remove@{remove}}
+\index{remove@{remove}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily bool SDCard\+::remove (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Permantly delete a file or directory
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to file or directory.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if path was deleted false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_a144e869ec9090712af70cc724b4d0c56}\label{classSDCard_a144e869ec9090712af70cc724b4d0c56} 
+\index{SDCard@{SDCard}!rename@{rename}}
+\index{rename@{rename}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{rename()}{rename()}}
+{\footnotesize\ttfamily bool SDCard\+::rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path\+From,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{path\+To }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Permantly rename a file or directory
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+From} & path to original file or directory \\
+\hline
+{\em path\+To} & path to new file or directory\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if path was renamed false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classSDCard_a207de663a509e1bd081374dcf5fd02e8}\label{classSDCard_a207de663a509e1bd081374dcf5fd02e8} 
+\index{SDCard@{SDCard}!rmdir@{rmdir}}
+\index{rmdir@{rmdir}!SDCard@{SDCard}}
+\doxysubsubsection{\texorpdfstring{rmdir()}{rmdir()}}
+{\footnotesize\ttfamily bool SDCard\+::rmdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Delete a directory
+
+path must be an empty directory.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to directory to delete.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if path was deleted false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{SDCard_8hpp}{SDCard.\+hpp}}\end{DoxyCompactItemize}

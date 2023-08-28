@@ -1,0 +1,50 @@
+ \hypertarget{md_README_autotoc_md0}{}\doxysection{Data Gator}\label{md_README_autotoc_md0}
+Aggregator firmware for Project Vine\+Heart as a Platform\+IO project.\hypertarget{md_README_autotoc_md1}{}\doxysubsubsection{Compiling and Uploading}\label{md_README_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item To build and upload the current code to the board without modifying\+:
+
+pio run -\/t upload // OR open serial monitor afterward pio run -\/t upload -\/t monitor
+\item To generate {\ttfamily include/config.\+h} with selected network parameters\+:
+
+pio run -\/e config-\/firebeetle32
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md2}{}\doxysubsubsection{Unit Tests}\label{md_README_autotoc_md2}
+Unit tests have been added to allow verification of firmware and hardware functionality. To use unit tests, connect the aggregator board to your laptop via USB and run the following command from the root of this directory\+: \begin{DoxyVerb}pio test
+\end{DoxyVerb}
+ This will run {\bfseries{all}} unit tests on the board and print the results to the terminal sans debug messages. To see more debug information run with option {\ttfamily -\/v}, {\ttfamily -\/vv}, or {\ttfamily -\/vvv} depending on how much information you need.
+
+Finally, if you only want to run a specific test use the following commands\+: \begin{DoxyVerb}# to see list of available tests
+pio test --list-tests
+
+# to run desired test 
+pio test -f <test_name>
+\end{DoxyVerb}
+ \doxysubparagraph*{NOTE}
+
+Further documentation on this command and Platform\+IO\textquotesingle{}s unit testing features can be found under these links\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://docs.platformio.org/en/latest/advanced/unit-testing/runner.html}{\texttt{ Platform\+IO Test Runner}}
+\item \href{https://docs.platformio.org/en/latest/advanced/unit-testing/runner.html}{\texttt{ {\ttfamily pio test} Command Documentation}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{Aggregators/\+Data Gators}\label{md_README_autotoc_md3}
+Aggregators collect sensor data from a variety of sensors(wired and wireless) and publish the data via MQTT messages to a broker. The aggregators have been dubbed the \char`\"{}\+Data Gators\char`\"{}. A example of the aggregator/\+Data Gator hardware is shown below\+:
+
+\hypertarget{md_README_autotoc_md4}{}\doxysection{Documentation}\label{md_README_autotoc_md4}
+Firmware and pertinent hardware documentation can be found in \`{}documentation/\`{} in this repository. This directory will contain generic firmware documentation as well as directories with documentation specific to certain versions of hardware/firmware as needed.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Documentation   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Contents    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Documentation   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Contents    }\\\cline{1-2}
+\endhead
+\PBS\centering Project Summary   &\PBS\centering Summary of hardware and firmware features.    \\\cline{1-2}
+\PBS\centering Sensor Hookup Guides   &\PBS\centering Resources for acquiring and using sensors that are supported by this project.    \\\cline{1-2}
+\PBS\centering \href{documentation/MQTT_Hardware_Documentation.xlsx}{\texttt{ MQTT and Hardware Documentation Spreadsheet}}   &\PBS\centering Description of MQTT topics and hardware interfaces.    \\\cline{1-2}
+\PBS\centering Espressif Binary Flash Tool for Windows   &\PBS\centering Download links and guide for how to flash firmware releases to the hardware using Espressif\textquotesingle{}s flash tool for Windows.   \\\cline{1-2}
+\end{longtabu}

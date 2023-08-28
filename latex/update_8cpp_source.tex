@@ -1,0 +1,144 @@
+\doxysection{update.\+cpp}
+\hypertarget{update_8cpp_source}{}\label{update_8cpp_source}\index{include/update.cpp@{include/update.cpp}}
+\mbox{\hyperlink{update_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <WiFi.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <WiFiMulti.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <HTTPClient.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <HTTPUpdate.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <tinyxml2.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <MQTTMailer.hpp>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <MQTTMailer.hpp>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{using\ namespace\ }tinyxml2;}
+\DoxyCodeLine{00024\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ OTA\_SERVER\ "{}192.168.50.10"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{extern}\ PubSubClient\ mqtt\_client;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{update_8cpp_a9b133af72f24d9221d811ae375854631}{new\_firmware\_version\_available}}()\ \{}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//Serial.println("{}\(\backslash\)tchecking\ available\ firmware\ version"{});}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{string}\ fw\_version\_url\ =\ string(\textcolor{stringliteral}{"{}http://"{}})\ +\ string(OTA\_SERVER)\ +\ string(\textcolor{stringliteral}{"{}/current\_version.txt"{}});}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.printf(\textcolor{stringliteral}{"{}\(\backslash\)tchecking\ new\ fw\ version\ @\ \%s\(\backslash\)n"{}},\ fw\_version\_url.c\_str());}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ HTTPClient\ httpClient;}
+\DoxyCodeLine{00047\ \ \ \ \ httpClient.begin(\ fw\_version\_url.c\_str()\ );}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ httpCode\ =\ httpClient.GET();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ httpCode\ ==\ 200\ )\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ fw\_filename\ =\ httpClient.getString().c\_str();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ fw\_version\ =\ fw\_filename.substr(fw\_filename.length()-\/10,\ 6).c\_str();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(fw\_filename.length()\ <\ 10)\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}failure"{}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\(\backslash\)tgot\ version\ string:\ \(\backslash\)"{}"{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(fw\_version.c\_str());}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}\(\backslash\)tfrom:\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ fw\_filename.c\_str());}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version\_major\ =\ stoi(fw\_filename.substr(fw\_filename.length()-\/9,\ 1));}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version\_minor\ =\ stoi(fw\_filename.substr(fw\_filename.length()-\/7,\ 1));}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ version\_patch\ =\ stoi(fw\_filename.substr(fw\_filename.length()-\/5,\ 1));}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ MQTTMailer\ instance\ =\ MQTTMailer::getInstance();}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::string\ topic\ =\ \textcolor{stringliteral}{"{}datagator/ota\_status/"{}}\ +\ std::string(WiFi.macAddress().c\_str());}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::string\ msg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}STATUS\_MSG\(\backslash\)"{}:\ \(\backslash\)"{}version\(\backslash\)"{},\ \(\backslash\)"{}SERVER\_FW\_VERSION\(\backslash\)"{}:\ \(\backslash\)"{}"{}}\ +\ fw\_version\ +\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)"{},\ \(\backslash\)"{}DEVICE\_FW\_VERSION\(\backslash\)"{}:\ \(\backslash\)"{}v"{}}\ +\ to\_string(VERSION\_MAJOR)\ +\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}."{}}\ +\ to\_string(VERSION\_MINOR)\ +\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}."{}}\ +\ to\_string(VERSION\_PATCH)\ +\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ instance.mailMessage(\&mqtt\_client,\ topic,\ msg);}
+\DoxyCodeLine{00076\ \ \ \ \ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.printf(\textcolor{stringliteral}{"{}\(\backslash\)tv\_maj:\ \%d,\ v\_min:\ \%d,\ v\_patch:\ \%d\(\backslash\)n"{}},\ version\_major,\ version\_minor,\ version\_patch);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ version\ doesn't\ match,\ update}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(version\_minor\ !=\ VERSION\_MINOR\ ||\ version\_major\ !=\ VERSION\_MAJOR\ ||\ version\_patch\ !=\ VERSION\_PATCH)\{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fw\_filename;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\(\backslash\)thttp\ connection\ failed\ with\ code\ "{}});}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(httpCode);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}:\ "{}});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(httpClient.errorToString(httpCode));}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00108\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{update_8cpp_a59d61902e825ebabe0a2259ba8e906ac}{update\_progress}}(\textcolor{keywordtype}{int}\ cur,\ \textcolor{keywordtype}{int}\ total)\{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.printf(\textcolor{stringliteral}{"{}CALLBACK:\ \ HTTP\ update\ process\ at\ \%d\ of\ \%d\ bytes...\(\backslash\)n"{}},\ cur,\ total);}
+\DoxyCodeLine{00110\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00118\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{update_8cpp_ac30dfa0188e237f4ae0f983a8dd84888}{update\_started}}()\{}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}CALLBACK:\ HTTP\ update\ process\ started"{}});}
+\DoxyCodeLine{00120\ \ \ \ \ MQTTMailer\ instance\ =\ MQTTMailer::getInstance();}
+\DoxyCodeLine{00121\ \ \ \ \ std::string\ topic\ =\ \textcolor{stringliteral}{"{}datagator/ota\_status/"{}}\ +\ std::string(WiFi.macAddress().c\_str());}
+\DoxyCodeLine{00122\ \ \ \ \ std::string\ msg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}STATUS\_MSG\(\backslash\)"{}:\ \(\backslash\)"{}started\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00123\ \ \ \ \ instance.mailMessage(\&mqtt\_client,\ topic,\ msg);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{update_8cpp_a4ab67b93fc9ac13fed541d66e044a039}{update\_finished}}()\{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}update\ finished"{}});}
+\DoxyCodeLine{00135\ \ \ \ \ MQTTMailer\ instance\ =\ MQTTMailer::getInstance();}
+\DoxyCodeLine{00136\ \ \ \ \ std::string\ topic\ =\ \textcolor{stringliteral}{"{}datagator/ota\_status/"{}}\ +\ std::string(WiFi.macAddress().c\_str());}
+\DoxyCodeLine{00137\ \ \ \ \ std::string\ msg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}STATUS\_MSG\(\backslash\)"{}:\ \(\backslash\)"{}finished\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00138\ \ \ \ \ instance.mailMessage(\&mqtt\_client,\ topic,\ msg);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{update_8cpp_a91745750976b456ed74139d5c6a07473}{update\_error}}(\textcolor{keywordtype}{int}\ err)\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.printf(\textcolor{stringliteral}{"{}CALLBACK:\ \ HTTP\ update\ fatal\ error\ code\ \%d\(\backslash\)n"{}},\ err);}
+\DoxyCodeLine{00152\ \ \ \ \ MQTTMailer\ instance\ =\ MQTTMailer::getInstance();}
+\DoxyCodeLine{00153\ \ \ \ \ std::string\ topic\ =\ \textcolor{stringliteral}{"{}datagator/ota/"{}}\ +\ std::string(WiFi.macAddress().c\_str());}
+\DoxyCodeLine{00154\ \ \ \ \ std::string\ msg\ =\ \textcolor{stringliteral}{"{}\{\(\backslash\)"{}STATUS\_MSG\(\backslash\)"{}:\ \(\backslash\)"{}error\(\backslash\)"{}\}"{}};}
+\DoxyCodeLine{00155\ \ \ \ \ instance.mailMessage(\&mqtt\_client,\ topic,\ msg);}
+\DoxyCodeLine{00156\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ *\ @brief\ Attempts\ OTA\ firmware\ update\ from\ server.\ }}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ *\ Check\ current\ firmware\ version\ on\ server,\ if\ newer\ then\ update.}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ *\ \ \ \ \ \ Example\ from\ HTTPUpdate\ library}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00164\ \textcolor{keywordtype}{void}\ attempt\_update()\ \{}
+\DoxyCodeLine{00165\ \ \ \ \ std::string\ file\_name\ =\ \mbox{\hyperlink{update_8cpp_a9b133af72f24d9221d811ae375854631}{new\_firmware\_version\_available}}();}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{if}(file\_name\ !=\ \textcolor{stringliteral}{"{}"{}})\{}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 3;\ i++)\{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ wait\ for\ WiFi\ connection}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}starting\ update\ attempt"{}});}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ WiFiClient\ client;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}client\ created"{}});}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ httpUpdate.onStart(\mbox{\hyperlink{update_8cpp_ac30dfa0188e237f4ae0f983a8dd84888}{update\_started}});}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ httpUpdate.onEnd(\mbox{\hyperlink{update_8cpp_a4ab67b93fc9ac13fed541d66e044a039}{update\_finished}});}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ httpUpdate.onProgress(\mbox{\hyperlink{update_8cpp_a59d61902e825ebabe0a2259ba8e906ac}{update\_progress}});}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ httpUpdate.onError(\mbox{\hyperlink{update_8cpp_a91745750976b456ed74139d5c6a07473}{update\_error}});}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ fw\_url\ =\ string(\textcolor{stringliteral}{"{}http://"{}})\ +\ string(OTA\_SERVER)\ +\ string(\textcolor{stringliteral}{"{}/"{}})\ +\ file\_name;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{update_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(fw\_url.c\_str());}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ t\_httpUpdate\_return\ ret\ =\ httpUpdate.update(client,\ fw\_url.c\_str());}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \}}
+\DoxyCodeLine{00186\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,105 @@
+\doxysection{include/firebeetle\+\_\+sleep.hpp File Reference}
+\hypertarget{firebeetle__sleep_8hpp}{}\label{firebeetle__sleep_8hpp}\index{include/firebeetle\_sleep.hpp@{include/firebeetle\_sleep.hpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+pm.\+h$>$}\newline
+Include dependency graph for firebeetle\+\_\+sleep.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{firebeetle__sleep_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{firebeetle__sleep_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{firebeetle__sleep_8hpp_a628c12ff2a1ac4b14a41f021723b2558}\label{firebeetle__sleep_8hpp_a628c12ff2a1ac4b14a41f021723b2558} 
+\#define {\bfseries u\+S\+\_\+\+TO\+\_\+\+S\+\_\+\+FACTOR}~1000000\+ULL  /\texorpdfstring{$\ast$}{*} Conversion factor for micro seconds to seconds \texorpdfstring{$\ast$}{*}/
+\item 
+\Hypertarget{firebeetle__sleep_8hpp_a9ab2ab36cf2973ccccb6d819989e4b04}\label{firebeetle__sleep_8hpp_a9ab2ab36cf2973ccccb6d819989e4b04} 
+\#define {\bfseries TIME\+\_\+\+TO\+\_\+\+SLEEP}~5        /\texorpdfstring{$\ast$}{*} Time ESP32 will go to sleep (in seconds) \texorpdfstring{$\ast$}{*}/
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{firebeetle__sleep_8hpp_a83aeba5587a4364be71fbe7633b1caef}{deep\+\_\+sleep}} (uint16\+\_\+t time\+\_\+to\+\_\+sleep)
+\begin{DoxyCompactList}\small\item\em Configure the ESP32 for sleep and then enter deep sleep. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{firebeetle__sleep_8hpp_a095807b6c0d23ed1b2d39dd8244b7e30}{hibernate}} (uint16\+\_\+t time\+\_\+to\+\_\+sleep)
+\begin{DoxyCompactList}\small\item\em Hibernate for {\ttfamily time\+\_\+to\+\_\+sleep} seconds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{firebeetle__sleep_8hpp_a0958ecc013d917b125db3899ee2aa968}{light\+\_\+sleep}} ()
+\begin{DoxyCompactList}\small\item\em Puts the device into light sleep. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{firebeetle__sleep_8hpp_a12735d59e634b566bdaae00c20792f44}{seconds\+\_\+to\+\_\+uS}} (uint16\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em Convert seconds to micro-\/seconds. \end{DoxyCompactList}\item 
+\Hypertarget{firebeetle__sleep_8hpp_a543437c02eec098c6cf5171b3f0a58fd}\label{firebeetle__sleep_8hpp_a543437c02eec098c6cf5171b3f0a58fd} 
+void {\bfseries print\+\_\+wakeup\+\_\+reason} ()
+\begin{DoxyCompactList}\small\item\em Method to print the reason by which ESP32 has been awaken from sleep. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{firebeetle__sleep_8hpp_a22ebbc698373afce094b495bf7605750}\label{firebeetle__sleep_8hpp_a22ebbc698373afce094b495bf7605750} 
+RTC\+\_\+\+DATA\+\_\+\+ATTR int {\bfseries boot\+Count} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{firebeetle__sleep_8hpp_a83aeba5587a4364be71fbe7633b1caef}\label{firebeetle__sleep_8hpp_a83aeba5587a4364be71fbe7633b1caef} 
+\index{firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}!deep\_sleep@{deep\_sleep}}
+\index{deep\_sleep@{deep\_sleep}!firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}}
+\doxysubsubsection{\texorpdfstring{deep\_sleep()}{deep\_sleep()}}
+{\footnotesize\ttfamily void deep\+\_\+sleep (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{time\+\_\+to\+\_\+sleep }\end{DoxyParamCaption})}
+
+
+
+Configure the ESP32 for sleep and then enter deep sleep. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em time\+\_\+to\+\_\+sleep} & time to elapse in seconds before waking up \\
+\hline
+\end{DoxyParams}
+\Hypertarget{firebeetle__sleep_8hpp_a095807b6c0d23ed1b2d39dd8244b7e30}\label{firebeetle__sleep_8hpp_a095807b6c0d23ed1b2d39dd8244b7e30} 
+\index{firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}!hibernate@{hibernate}}
+\index{hibernate@{hibernate}!firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}}
+\doxysubsubsection{\texorpdfstring{hibernate()}{hibernate()}}
+{\footnotesize\ttfamily void hibernate (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{time\+\_\+to\+\_\+sleep }\end{DoxyParamCaption})}
+
+
+
+Hibernate for {\ttfamily time\+\_\+to\+\_\+sleep} seconds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em time\+\_\+to\+\_\+sleep} & The number of seconds to put the device to sleep for \\
+\hline
+\end{DoxyParams}
+\Hypertarget{firebeetle__sleep_8hpp_a0958ecc013d917b125db3899ee2aa968}\label{firebeetle__sleep_8hpp_a0958ecc013d917b125db3899ee2aa968} 
+\index{firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}!light\_sleep@{light\_sleep}}
+\index{light\_sleep@{light\_sleep}!firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}}
+\doxysubsubsection{\texorpdfstring{light\_sleep()}{light\_sleep()}}
+{\footnotesize\ttfamily void light\+\_\+sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Puts the device into light sleep. 
+
+Light sleep allows some types of power sections to continue operating. \Hypertarget{firebeetle__sleep_8hpp_a12735d59e634b566bdaae00c20792f44}\label{firebeetle__sleep_8hpp_a12735d59e634b566bdaae00c20792f44} 
+\index{firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}!seconds\_to\_uS@{seconds\_to\_uS}}
+\index{seconds\_to\_uS@{seconds\_to\_uS}!firebeetle\_sleep.hpp@{firebeetle\_sleep.hpp}}
+\doxysubsubsection{\texorpdfstring{seconds\_to\_uS()}{seconds\_to\_uS()}}
+{\footnotesize\ttfamily uint16\+\_\+t seconds\+\_\+to\+\_\+uS (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{seconds }\end{DoxyParamCaption})}
+
+
+
+Convert seconds to micro-\/seconds. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em seconds} & \\
+\hline
+\end{DoxyParams}

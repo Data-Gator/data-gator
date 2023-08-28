@@ -1,0 +1,114 @@
+\doxysection{include/config.hpp File Reference}
+\hypertarget{config_8hpp}{}\label{config_8hpp}\index{include/config.hpp@{include/config.hpp}}
+
+
+Defines configuration options for network, sensor readings, etc.  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{config_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{config_8hpp_af24f428a59a4f0f3bca0428de5d8958e}{NETWORK}}~"{}lgdatanet"{}
+\item 
+\#define \mbox{\hyperlink{config_8hpp_a28a9d90fe947c3f13b83d1b3440246b0}{PSSWD}}~"{}lgd4t4n3t!"{}
+\item 
+\#define \mbox{\hyperlink{config_8hpp_a619e6f4f4bc00f5c2ca68a1aad382202}{MQTT\+\_\+\+BROKER\+\_\+\+ADDR}}~"{}192.\+168.\+50.\+10"{}
+\item 
+\#define \mbox{\hyperlink{config_8hpp_aa8632baff6bbb5004385998918f1e6bd}{MQTT\+\_\+\+PORT}}~1883
+\item 
+\#define \mbox{\hyperlink{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}}~1
+\item 
+\#define \mbox{\hyperlink{config_8hpp_ac39e7144fabb2ba47a75f88640a1bb4b}{WIFI\+\_\+\+TIMEOUT}}~10000
+\item 
+\#define \mbox{\hyperlink{config_8hpp_ae14eaaed1fe7cdf491da54a714c426b3}{MAX\+\_\+\+COUNT}}~120
+\item 
+\#define \mbox{\hyperlink{config_8hpp_a5420655b6c292f8b3999b35374ff686a}{OTA\+\_\+\+FREQ}}~60
+\item 
+\#define \mbox{\hyperlink{config_8hpp_a63929664348237323cf24eda9d046748}{VWC\+\_\+\+FREQ}}~5
+\item 
+\#define \mbox{\hyperlink{config_8hpp_ab8f6d4487aad03d548ccaba7645f7722}{HT\+\_\+\+FREQ}}~5
+\item 
+\#define \mbox{\hyperlink{config_8hpp_a4665514bc689b72073e4f94e00e0cb1e}{TLM\+\_\+\+FREQ}}~5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines configuration options for network, sensor readings, etc. 
+
+Project Configuration Header generated from config.\+ini using config\+\_\+generator.\+py 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83}\label{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83} 
+\index{config.hpp@{config.hpp}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{DEBUG}{DEBUG}}
+{\footnotesize\ttfamily \#define DEBUG~1}
+
+Global serial debug output flag \Hypertarget{config_8hpp_ab8f6d4487aad03d548ccaba7645f7722}\label{config_8hpp_ab8f6d4487aad03d548ccaba7645f7722} 
+\index{config.hpp@{config.hpp}!HT\_FREQ@{HT\_FREQ}}
+\index{HT\_FREQ@{HT\_FREQ}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{HT\_FREQ}{HT\_FREQ}}
+{\footnotesize\ttfamily \#define HT\+\_\+\+FREQ~5}
+
+Ticks/minutes between temperature and humidity sensor readings \Hypertarget{config_8hpp_ae14eaaed1fe7cdf491da54a714c426b3}\label{config_8hpp_ae14eaaed1fe7cdf491da54a714c426b3} 
+\index{config.hpp@{config.hpp}!MAX\_COUNT@{MAX\_COUNT}}
+\index{MAX\_COUNT@{MAX\_COUNT}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{MAX\_COUNT}{MAX\_COUNT}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+COUNT~120}
+
+Number of timer ticks/power resets \Hypertarget{config_8hpp_a619e6f4f4bc00f5c2ca68a1aad382202}\label{config_8hpp_a619e6f4f4bc00f5c2ca68a1aad382202} 
+\index{config.hpp@{config.hpp}!MQTT\_BROKER\_ADDR@{MQTT\_BROKER\_ADDR}}
+\index{MQTT\_BROKER\_ADDR@{MQTT\_BROKER\_ADDR}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{MQTT\_BROKER\_ADDR}{MQTT\_BROKER\_ADDR}}
+{\footnotesize\ttfamily \#define MQTT\+\_\+\+BROKER\+\_\+\+ADDR~"{}192.\+168.\+50.\+10"{}}
+
+MQTT broker network address \Hypertarget{config_8hpp_aa8632baff6bbb5004385998918f1e6bd}\label{config_8hpp_aa8632baff6bbb5004385998918f1e6bd} 
+\index{config.hpp@{config.hpp}!MQTT\_PORT@{MQTT\_PORT}}
+\index{MQTT\_PORT@{MQTT\_PORT}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{MQTT\_PORT}{MQTT\_PORT}}
+{\footnotesize\ttfamily \#define MQTT\+\_\+\+PORT~1883}
+
+MQTT broker port \Hypertarget{config_8hpp_af24f428a59a4f0f3bca0428de5d8958e}\label{config_8hpp_af24f428a59a4f0f3bca0428de5d8958e} 
+\index{config.hpp@{config.hpp}!NETWORK@{NETWORK}}
+\index{NETWORK@{NETWORK}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{NETWORK}{NETWORK}}
+{\footnotesize\ttfamily \#define NETWORK~"{}lgdatanet"{}}
+
+Wi\+Fi network SSID \Hypertarget{config_8hpp_a5420655b6c292f8b3999b35374ff686a}\label{config_8hpp_a5420655b6c292f8b3999b35374ff686a} 
+\index{config.hpp@{config.hpp}!OTA\_FREQ@{OTA\_FREQ}}
+\index{OTA\_FREQ@{OTA\_FREQ}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{OTA\_FREQ}{OTA\_FREQ}}
+{\footnotesize\ttfamily \#define OTA\+\_\+\+FREQ~60}
+
+Frequency with which the device checks for new firmware version on server \Hypertarget{config_8hpp_a28a9d90fe947c3f13b83d1b3440246b0}\label{config_8hpp_a28a9d90fe947c3f13b83d1b3440246b0} 
+\index{config.hpp@{config.hpp}!PSSWD@{PSSWD}}
+\index{PSSWD@{PSSWD}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{PSSWD}{PSSWD}}
+{\footnotesize\ttfamily \#define PSSWD~"{}lgd4t4n3t!"{}}
+
+Wi\+Fi network password \Hypertarget{config_8hpp_a4665514bc689b72073e4f94e00e0cb1e}\label{config_8hpp_a4665514bc689b72073e4f94e00e0cb1e} 
+\index{config.hpp@{config.hpp}!TLM\_FREQ@{TLM\_FREQ}}
+\index{TLM\_FREQ@{TLM\_FREQ}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{TLM\_FREQ}{TLM\_FREQ}}
+{\footnotesize\ttfamily \#define TLM\+\_\+\+FREQ~5}
+
+Ticks/minutes between device telemetry reports \Hypertarget{config_8hpp_a63929664348237323cf24eda9d046748}\label{config_8hpp_a63929664348237323cf24eda9d046748} 
+\index{config.hpp@{config.hpp}!VWC\_FREQ@{VWC\_FREQ}}
+\index{VWC\_FREQ@{VWC\_FREQ}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{VWC\_FREQ}{VWC\_FREQ}}
+{\footnotesize\ttfamily \#define VWC\+\_\+\+FREQ~5}
+
+Ticks/minutes between volumetric water content sensor readings \Hypertarget{config_8hpp_ac39e7144fabb2ba47a75f88640a1bb4b}\label{config_8hpp_ac39e7144fabb2ba47a75f88640a1bb4b} 
+\index{config.hpp@{config.hpp}!WIFI\_TIMEOUT@{WIFI\_TIMEOUT}}
+\index{WIFI\_TIMEOUT@{WIFI\_TIMEOUT}!config.hpp@{config.hpp}}
+\doxysubsubsection{\texorpdfstring{WIFI\_TIMEOUT}{WIFI\_TIMEOUT}}
+{\footnotesize\ttfamily \#define WIFI\+\_\+\+TIMEOUT~10000}
+
+Wi\+Fi timeout in seconds 

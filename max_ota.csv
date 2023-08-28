@@ -1,0 +1,10 @@
+# 08/04/2022
+# Garrett Wells
+# 
+# Optimized for 4MB DFRobot Firebeetle32
+#
+# Name,   Type, SubType, Offset,     Size, Flags
+nvs,      data, nvs,           ,   0x3000,
+otadata,  data, ota,     	   ,   0x2000,
+app0,     app,  ota_0,         ,  1989760,
+app1, 	  app,  ota_1,         ,  1989760,

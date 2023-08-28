@@ -1,0 +1,53 @@
+\doxysection{include/logger.hpp File Reference}
+\hypertarget{logger_8hpp}{}\label{logger_8hpp}\index{include/logger.hpp@{include/logger.hpp}}
+
+
+Logging Utilities for detecting and selecting logging interfaces.  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{logger_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{logger_8hpp_a2799093145858620308ff4421e6a1ea3}{log\+\_\+data}} (std\+::string topic, std\+::string message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}\label{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8} 
+int {\bfseries reset\+\_\+count}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Logging Utilities for detecting and selecting logging interfaces. 
+
+\begin{DoxyAuthor}{Author}
+Garret Wells 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{logger_8hpp_a2799093145858620308ff4421e6a1ea3}\label{logger_8hpp_a2799093145858620308ff4421e6a1ea3} 
+\index{logger.hpp@{logger.hpp}!log\_data@{log\_data}}
+\index{log\_data@{log\_data}!logger.hpp@{logger.hpp}}
+\doxysubsubsection{\texorpdfstring{log\_data()}{log\_data()}}
+{\footnotesize\ttfamily void log\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::string}]{topic,  }\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+Helper function that handles all data logging to MQTT and the SD card automatically.
+
+IF (there is a Wi\+Fi connection) -\/\texorpdfstring{$>$}{>} log to MQTT broker IF (there is a SD card) -\/\texorpdfstring{$>$}{>} log to SD card
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em topic} & The MQTT topic to log \\
+\hline
+\mbox{\texttt{ in}}  & {\em message} & The message to log, likely JSON object \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,3 @@
+[submodule "SDLogger"]
+    path = lib/SDLogger
+    url = https://github.com/Data-Gator/SDLogger

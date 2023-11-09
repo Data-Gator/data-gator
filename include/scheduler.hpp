@@ -1,15 +1,15 @@
 /**
- * @brief Utilities for scheduling tasks and saving persistent data.
- *
- * Defines the mechanism for implementing task scheduling for sensors, OTA updates, etc.
- * Timing is measured in "ticks". One tick is approximately 64 seconds or the time that the
- * watchdog timer waits before reseting the device and waking it from hibernation.
- * 
- * Ticks are tracked between power cycles using the non-volatile storage (NVS) system.
- *
- * @author Garrett Wells
  * @file scheduler.hpp
- */
+ * @brief Utilities for scheduling tasks and saving persistent data. 
+ *
+ * Defines the mechanism for implementing task scheduling for sensors, OTA updates, etc. 
+ * Timing is measured in "ticks". One tick is approximately 64 seconds or the time that 
+ * the watchdog timer waits before reseting the device and waking it from hibernation. 
+ * Ticks are tracked between power cycles using the non-volatile storage (NVS) system. 
+ *
+ * @author Garrett Wells 
+ * @date 2023
+ * */
 
 #ifndef SCHEDULER_HPP
 #define SCHEDULER_HPP
@@ -31,9 +31,15 @@ extern Adafruit_ADS1115 ads;
 int reset_count = -1; // times reset by WDT, one tick roughly equivalent to one minute
 
 /**
- * Counters for when the last time the task was executed.
+ * @brief Data structure for task scheduling stored in NVS. 
  *
- * Last reset counter value when reading was taken.
+ * Counters for when the last time the task was executed, the last reset counter value 
+ * when reading was taken. Members are named by task name and the `_t0` denotes physics-esque
+ * mathematical notation, ie this is the starting point of our calculation.
+ *
+ * Tasks are similarly named functions which are run when the current reset count value minus 
+ * the previous reset count recorded in `<task_name>_t0` equals the time between task executions
+ * specified in the config header.
  */
 struct planner{
     /** time since analog reading */
@@ -47,7 +53,7 @@ struct planner{
 }planner;
 
 /**
- * Open NVS, check if it is initialized with data, if not, initialize it.
+ * @brief Open NVS, check if it is initialized with data, if not, initialize it.
  */
 void init_nvs(){
 
@@ -79,9 +85,11 @@ void init_nvs(){
 }
 
 /**
- * Check if a task will run this time, NVS must be initialized first!
+ * @brief Check if a task will run this time, NVS must be initialized first!
  *
  * @param[in] reset_count The number of resets recorded.
+ *
+ * @returns `true` if a task is scheduled to run this reboot cycle, `false` otherwise
  */
 bool task_is_scheduled(int reset_count){
     bool run_vwc = reset_count - planner.analog_t0 >= VWC_FREQ;
@@ -267,7 +275,7 @@ void PatWDT(){
 }
 
 /**
- * Send a telemetry message to the MQTT broker.
+ * @brief Send a telemetry message to the MQTT broker.
  */
 void SendTLM(){
 	if(DEBUG){
@@ -360,7 +368,7 @@ void Scheduler(int reset_count){
 }
 
 /**
- * Clear all tasks so that none are scheduled to run
+ * @brief Clear all tasks so that none are scheduled to run
  *
  * @param[in] reset_count The number of reset counts to have elapsed.
  */

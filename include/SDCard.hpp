@@ -16,9 +16,9 @@
 
 // For ESP32 these can be assigned to nearly any GPIO pins.
 #define TT_CLK 14
-#define TT_MISO 25
-#define TT_MOSI 13
-#define TT_SS 2
+#define TT_MISO 25  //!< SPI MISO pin mapping
+#define TT_MOSI 13  //!< SPI MOSI mapping
+#define TT_SS 2     //!< SPI CS/SS chip select pin
 
 /// \brief Thin wrapper around ESP32 SD card API.
 ///

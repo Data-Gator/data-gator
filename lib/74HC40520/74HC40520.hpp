@@ -1,17 +1,26 @@
+/**
+ * @file 74HC40520.hpp
+ * @brief Implements library for an analog signal multiplexer.
+ *
+ * @author Garrett Wells
+ * @date 2022
+ */
 #include <Arduino.h>
 
-/*
- * TRUTH TABLE
+/**
+ * @brief Defines a firmware interface for the 74HC40520 multiplexer.
+ *
+ * ### Chip Pin Truth Table
  * 
- *	MUX_INH  | B | A | Selected Channels
- *	------------------------------------
- *	L        | L | L | 0X, 0Y
- *  L        | L | H | 1X, 1Y
- *  L        | H | L | 2X, 2Y
- *  L        | H | H | 3X, 3Y
- *  H        | X | X | XXXXXX
+ *	| MUX_INH  | B     | A     | Selected Channels | 
+ *	| :------: | :---: | :---: | :---------------: | 
+ *	| L        | L     | L     | 0X, 0Y
+ *  | L        | L     | H     | 1X, 1Y
+ *  | L        | H     | L     | 2X, 2Y
+ *  | L        | H     | H     | 3X, 3Y
+ *  | H        | X     | X     | XXXXXX
+ *
  */
-
 class MUX_74HC40520{
 public:
 	MUX_74HC40520(void){}
@@ -85,7 +94,7 @@ public:
 	/**
 	 * @brief      Reads the analog value at the channel.
 	 *
-	 * @param[in]  outputChannel  The output channel
+	 * @param[in]  outputChannel  The output channel, can be `enum Mux_Channel`
 	 */
 	int readChannel(int pin){
 		return analogRead(pin);
@@ -95,14 +104,21 @@ public:
 	 * @brief      Writes a channel.
 	 *
 	 * @param[in]  inputChannel  The input channel
-	 * @param[in]  value         The value
+	 * @param[in]  value         The integer value to write to the pin, HIGH or LOW.
 	 */
 	void writeChannel(int pin, int value){
 		digitalWrite(pin, value);
 	}
 
+    /**
+     * @brief Defines the two MUX signal channels X and Y.
+     *
+     * Use these channesl to select which channel you want to write
+     * or read a value to/from.
+     */
 	enum Mux_Channel {
-		X, Y
+		X, //!< X channel
+        Y  //!< Y channel
 	};
 
 private:

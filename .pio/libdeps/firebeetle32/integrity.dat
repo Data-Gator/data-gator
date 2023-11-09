@@ -1,0 +1,7 @@
+paulstoffregen/OneWire
+adafruit/Adafruit BusIO
+adafruit/Adafruit MAX1704x
+milesburton/DallasTemperature
+knolleary/PubSubClient
+bblanchon/ArduinoJson@^6.19.4
+h2zero/NimBLE-Arduino@^1.4.0

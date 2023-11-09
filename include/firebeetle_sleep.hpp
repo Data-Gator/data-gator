@@ -1,18 +1,22 @@
 /**
- * @defgroup   FIREBEETLE_SLEEP firebeetle sleep
- *
+ * @file firebeetle_sleep.hpp
  * @brief      This file implements firebeetle sleep (ESP32)
+ *
+ * Implements wrapper functions used to put the uC processor of the ESP32 into
+ * a power conserving sleep mode. The deep_sleep function configures the ESP32
+ * to turn off RTC peripherals but still wake from sleep without external prompting
+ * via the reset pin.
  *
  * @author     Garrett Wells
  * @date       2022
- * @file firebeetle_sleep.hpp
  */
 #include <Arduino.h>
 #include <esp_pm.h>
 
-
-#define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define TIME_TO_SLEEP  5        /* Time ESP32 will go to sleep (in seconds) */
+/** Conversion factor for micro seconds to seconds */
+#define uS_TO_S_FACTOR 1000000ULL  
+/** Time ESP32 will go to sleep (in seconds) */
+#define TIME_TO_SLEEP  5        
 
 RTC_DATA_ATTR int bootCount = 0;
 

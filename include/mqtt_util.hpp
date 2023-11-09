@@ -2,7 +2,14 @@
  * @brief Utilities for receiving and sending MQTT commands.
  *
  * Utilities and interface for receiving MQTT messages from the broker. Also used to 
- * request data logged to the uSD card from the device.
+ * request data logged to the uSD card from the device. 
+ *
+ * 1. defines a basic callback to 
+ * attach to the MQTT client object to handle received messages.
+ * 2. defines a function to check and take proper action on commands
+ *  received via MQTT.
+ *
+ *
  *
  * @author Garrett Wells
  * @file mqtt_util.hpp
@@ -18,8 +25,8 @@
  * then the message is processed. The message contains details about 
  * how the command should be carried out.
  *
- * @param command The command as a string.
- * @param message The body/message sent with the command.
+ * @param[in] command The command as a string.
+ * @param[in] message The body/message sent with the command.
  */
 void process_command(string command, string message){
 
@@ -121,11 +128,20 @@ void process_command(string command, string message){
  * @brief      Called when MQTT message is passed to the device by the broker.
  *
  * Prints command and message to serial interface,
- * then parses the MQTT packet and processes the command.
+ * then parses the MQTT packet and processes the command. 
  *
- * @param      topic    The topic the message was published on
- * @param      message  The message in the MQTT packet
- * @param[in]  length   The length of the message
+ * Commands are defined as a anything published to the 
+ * `datagator/cmd/#` topic tree. The `#` symbol is an MQTT regex
+ * glob symbol that matches all MAC addresses. It tells the DG to 
+ * subscribe to all commands published to ALL DGs. 
+ *
+ * The command is only processed in `process_command(...)` if the 
+ * MAC address in the topic, such as `datagator/cmd/AC:45...` 
+ * matches the MAC of this DG.
+ *
+ * @param[in] topic    The topic the message was published on
+ * @param[in] message  The message in the MQTT packet
+ * @param[in] length   The length of the message
  */
 void callback(char* topic, byte* message, unsigned int length){
     std::string msg_str;

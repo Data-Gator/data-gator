@@ -4,9 +4,9 @@
 /**
  * @brief      Check if the advertised device is a Minew S1 sensor
  *
- * @param[in]  dev   The advertised data received
+ * @param[in]  dev The advertised data received
  *
- * @return     true if the device has a service UUID that is recognized, false otherwise
+ * @return     `true` if the device has a service UUID that is recognized, `false` otherwise
  */
 bool MinewS1::advertisedDeviceIsS1(NimBLEAdvertisedDevice* dev){
 
@@ -124,7 +124,7 @@ MQTTMail* MinewS1::parseAdvertisedData(NimBLEAdvertisedDevice* dev){
 }
 
 /**
- * @brief      Convert the uint16_t in HT_Frame to a float temperature value in Celsius
+ * @brief      Convert the `uint16_t` in HT_Frame to a float temperature value in Celsius
  *
  * @return     temperature in celsius as a float
  */
@@ -136,7 +136,7 @@ float MinewS1::getTemp(){
 }
 
 /**
- * @brief      Convert uint16_t from HT_Frame to a float relative humidity value
+ * @brief      Convert `uint16_t` from HT_Frame to a float relative humidity value
  *
  * @return     relative humidity as a float
  */

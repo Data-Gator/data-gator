@@ -1,8 +1,20 @@
 /**
+ * @file ble_util.hpp
  * @brief Utilities such as callbacks for parsing bluetooth packets.
  *
+ * # Basic Functional Summary
+ * The callback `onResult()` receives data from advertising sensors and then checks if that packet
+ *  belongs to a known/supported sensor. If so, then the data is parsed and logged using
+ *  the logging utils in logger.hpp.
+ *
+ * # Integration
+ * All BLE supported BLE sensors should be integrated with their own class which inherits from 
+ *  BLESensor.hpp. The class should also implement a function `<sensor class>.advertisedDeviceIs<sensor type>(dev)`
+ *  which parses the data packet and returns true if identified as an instance of that 
+ *  sensor type.
+ *
  * @author Garrett Wells
- * @file ble_util.hpp
+ * @date 2023
  */
 
 #ifndef BLE_UTIL_HPP
@@ -11,7 +23,7 @@
 #include <NimBLEAdvertisedDevice.h>
 #include <BLESensor.hpp>
 #include <MinewS1.hpp>
-#include <KKM_K6P.hpp>
+#include <KKM_K6P.hpp> 
 #include <logger.hpp>
 
 /**
@@ -27,6 +39,8 @@ class ScanCallbacks: public NimBLEAdvertisedDeviceCallbacks {
      * 
      * Checks device advertisement for known sensor IDs. If recognized, then the packet is 
      * parsed.
+     *
+     * @param[in] dev The packet received by the BLE stack. Contains information needed to identify the sensor as well as data.
 	 */	
 	void onResult(NimBLEAdvertisedDevice* dev){
         //Serial.printf("Advertised Device: %s\n", dev.toString().c_str());

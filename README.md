@@ -3,7 +3,7 @@
 Aggregator firmware for Project VineHeart as a PlatformIO project.
 
 - [Fast Start: Compiling and Uploading Firmware to a Board](#fast-start-compiling-and-uploading)
-- [Documentation and Guides](#documentation)
+- [Firmware Documentation and Guides](#documentation)
 
 # Aggregators/Data Gators
 Aggregators collect sensor data from a variety of sensors(wired and wireless) and publish the data via MQTT messages to a broker. The aggregators have been dubbed the "Data Gators". A example of the aggregator/Data Gator hardware is shown below:

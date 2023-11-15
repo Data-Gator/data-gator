@@ -15,6 +15,7 @@ This directory contains reference documentation for the data gator firmware solu
 - [How to Access Logged Data](How_To_Access_Logged_Data.md)
 - [MQTT Topics](MQTT_Topics.md)
 - [Sensor Guides](sensors_and_wiring/README.md)
+- [Firmware States and Execution Description](firmware_documentation.md)
 
 # Workflow for Users
 
@@ -42,6 +43,7 @@ _**Pre-requisites:** A data gator board with sensors and power supply. Also some
 
 It is assumed if you are a developer, you are interested in doing one of the following or have the skills to do whatever you want.
 
+* [Detailed Firmware Execution Description](firmware_documentation.md)
 * [Doxygen Documentation for API](https://data-gator.github.io/doxygen_firmware_docs/index.html)
 
     * if you have doxygen installed on your system, build doxygen docs from code with `doxygen datagator.doxyconfig` from root of repository.

@@ -16,9 +16,8 @@ Firmware and pertinent hardware documentation can be found in [`documentation/`]
 
 | Documentation | Contents | 
 | :---: | :---: | 
-| [Project Summary](documentation/README.md) | Summary of hardware and firmware features. |
-| [Sensor Hookup Guides](documentation/sensors_and_wiring/README.md) | Resources for acquiring and using sensors that are supported by this project. |
-| [MQTT and Hardware Documentation Spreadsheet](documentation/MQTT_Hardware_Documentation.xlsx) | Description of MQTT topics and hardware interfaces. |
+| [**Recommended:** Firmware Documentation](documentation/README.md) | The complete documentation for using, managing, and developing firmware for the Data Gator using the code in this repository. |
+| [MQTT and Hardware Documentation Spreadsheet](documentation/MQTT_Topics.md) | Description of MQTT topics and hardware interfaces. |
 | [Espressif Binary Flash Tool for Windows](documentation/Espressif_Flash_Download_Tool.md) | Download links and guide for how to flash firmware releases to the hardware using Espressif's flash tool for Windows. |
 
 

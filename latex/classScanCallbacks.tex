@@ -27,12 +27,37 @@ Collaboration diagram for Scan\+Callbacks\+:\nopagebreak
 \includegraphics[width=268pt]{classScanCallbacks__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} \mbox{\hyperlink{classScanCallbacks_ac34f6efbb63fc4bde3722c9374765d33}{on\+Result}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{Nim\+BLEAdvertised\+Device}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{dev}})
+\begin{DoxyCompactList}\small\item\em What to do when a device has been picked up by the scan. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Callbacks for BLE packets. 
 
 Provides a set of callbacks to handle identification, parsing and other stages of handling BLE devices and packets. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classScanCallbacks_ac34f6efbb63fc4bde3722c9374765d33}\label{classScanCallbacks_ac34f6efbb63fc4bde3722c9374765d33} 
+\index{ScanCallbacks@{ScanCallbacks}!onResult@{onResult}}
+\index{onResult@{onResult}!ScanCallbacks@{ScanCallbacks}}
+\doxysubsubsection{\texorpdfstring{onResult()}{onResult()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} Scan\+Callbacks\+::on\+Result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{Nim\+BLEAdvertised\+Device}} \texorpdfstring{$\ast$}{*}}]{dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+What to do when a device has been picked up by the scan. 
+
+Checks device advertisement for known sensor IDs. If recognized, then the packet is parsed.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em dev} & The packet received by the BLE stack. Contains information needed to identify the sensor as well as data. \\
+\hline
+\end{DoxyParams}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -3,86 +3,86 @@
 \mbox{\hyperlink{logger_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ LOGGER\_HPP}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ LOGGER\_HPP}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ reset\_count;}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logger_8hpp_a2799093145858620308ff4421e6a1ea3}{log\_data}}(std::string\ topic,\ std::string\ message)\{}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ wifi\_connected\ =\ WiFi.status()\ ==\ WL\_CONNECTED;}
-\DoxyCodeLine{00026\ \ \ \ \ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{if}(wifi\_connected)\{}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ log\ to\ MQTT\ }}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ MQTTMailer\ instance\ =\ MQTTMailer::getInstance();}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ instance.mailMessage(\&mqtt\_client,\ topic,\ message);}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)t-\/>\ logging\ to\ MQTT"{}});}
-\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ LOGGER\_HPP}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ LOGGER\_HPP}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\_count}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{logger_8hpp_a2799093145858620308ff4421e6a1ea3}{log\_data}}(std::string\ topic,\ std::string\ message)\{}
 \DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ logging\ available\ set\ when\ initializing\ SDLogger\ in\ }}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ \ setup}}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{if}(logging\_available)\{}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)t-\/>\ logging\ to\ SD\ card"{}});}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::string\ time;}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(absolute\_timestamp\_available)\{}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ absolute\ time\ from\ NTP}}
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ time\ =\ tsp-\/>get\_timestamp();}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(logger,\ time,\ topic,\ message);}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ logged\_relative\_data\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ relative\ timestamp\ and\ offset}}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ calculate\ the\ offset\ to\ use}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ log\_offset\ =\ \mbox{\hyperlink{logging__util_8cpp_abc8f9c3ac6f2042bc5fc8660063aad5e}{cache\_retrieve\_log\_offset}}();}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ log\ offset:\%i,\ reset\_count:\%i,\ tsp\ offset:\%i\(\backslash\)n"{}},\ log\_offset,\ reset\_count,\ tsp-\/>get\_offset());}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ new\_offset;}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ prevent\ reset\_count\ wrap\ from\ breaking}}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ relative\ time\ keeping}}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(log\_offset\ >\ reset\_count)\{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ offset\ has\ exceeded\ MAX\_COUNT\ and\ wrapped\ }}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ make\ the\ new\ offset\ the\ old\ offset\ +\ net\ distance\ }}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ between\ log\_offset\ and\ reset\_count}}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_offset\ =\ tsp-\/>get\_offset()\ +\ (\mbox{\hyperlink{config_8hpp_ae14eaaed1fe7cdf491da54a714c426b3}{MAX\_COUNT}}\ -\/\ log\_offset)\ +\ reset\_count;}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ new\ offset\ is\ cached\ offset\ +\ distance\ between\ }}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ current\ reset\ count\ and\ previous\ marker}}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_offset\ =\ tsp-\/>get\_offset()\ +\ (reset\_count\ -\/\ log\_offset);}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ parse\ the\ date\ and\ time\ from\ previous\ time\ stamp}}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ date\ =\ std::to\_string(tsp-\/>get\_month())\ +\ \textcolor{stringliteral}{"{}-\/"{}}\ +\ }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(tsp-\/>get\_day())\ +\ \textcolor{stringliteral}{"{}-\/"{}}\ +\ }
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(tsp-\/>get\_year());}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ clock\_time\ =\ std::to\_string(tsp-\/>get\_hours())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ }
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(tsp-\/>get\_minutes())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(tsp-\/>get\_seconds());}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ wifi\_connected\ =\ WiFi.status()\ ==\ WL\_CONNECTED;}
+\DoxyCodeLine{00036\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{if}(wifi\_connected)\{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ log\ to\ MQTT\ }}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classMQTTMailer}{MQTTMailer}}\ instance\ =\ MQTTMailer::getInstance();}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ instance.\mbox{\hyperlink{classMQTTMailer_a47a0d54292af2c913d73cd84c5c3ba85}{mailMessage}}(\&\mbox{\hyperlink{update_8cpp_a965861de1a367ef4c2b467de34de2683}{mqtt\_client}},\ topic,\ message);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)t-\/>\ logging\ to\ MQTT"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ logging\ available\ set\ when\ initializing\ SDLogger\ in\ }}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ \ setup}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{logging__util_8cpp_a618f91fbc4c35bde353fc1732d389a69}{logging\_available}})\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)t-\/>\ logging\ to\ SD\ card"{}});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::string\ time;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{logging__util_8cpp_ac0b73c0ce5c9049c6073dc70fc9bb227}{absolute\_timestamp\_available}})\{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ absolute\ time\ from\ NTP}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ time\ =\ \mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_timestamp();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(\mbox{\hyperlink{logging__util_8cpp_a446e0ace32278a3a0ee36f498eb24e04}{logger}},\ time,\ topic,\ message);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a0f9cf039424a99aff815f1fbb03eb9ca}{logged\_relative\_data}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ relative\ timestamp\ and\ offset}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ calculate\ the\ offset\ to\ use}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ log\_offset\ =\ \mbox{\hyperlink{logging__util_8cpp_abc8f9c3ac6f2042bc5fc8660063aad5e}{cache\_retrieve\_log\_offset}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ log\ offset:\%i,\ reset\_count:\%i,\ tsp\ offset:\%i\(\backslash\)n"{}},\ log\_offset,\ \mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\_count}},\ \mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_offset());}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ new\_offset;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ prevent\ reset\_count\ wrap\ from\ breaking}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ relative\ time\ keeping}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(log\_offset\ >\ \mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\_count}})\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ offset\ has\ exceeded\ MAX\_COUNT\ and\ wrapped\ }}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ so\ make\ the\ new\ offset\ the\ old\ offset\ +\ net\ distance\ }}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ between\ log\_offset\ and\ reset\_count}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_offset\ =\ \mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_offset()\ +\ (\mbox{\hyperlink{config_8hpp_ae14eaaed1fe7cdf491da54a714c426b3}{MAX\_COUNT}}\ -\/\ log\_offset)\ +\ \mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\_count}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ new\ offset\ is\ cached\ offset\ +\ distance\ between\ }}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ current\ reset\ count\ and\ previous\ marker}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_offset\ =\ \mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_offset()\ +\ (\mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\_count}}\ -\/\ log\_offset);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ offset\ =\ std::to\_string(new\_offset);}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ time\ =\ tsb-\/>get\_date\_time(date,\ clock\_time,\ offset);}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ save\ the\ timestamp\ with\ updated\ offset}}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ time\_stamp\_to\_cache\ =\ time;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ parse\ the\ date\ and\ time\ from\ previous\ time\ stamp}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ date\ =\ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_month())\ +\ \textcolor{stringliteral}{"{}-\/"{}}\ +\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_day())\ +\ \textcolor{stringliteral}{"{}-\/"{}}\ +\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_year());}
 \DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(logger,\ time,\ topic,\ message);}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ logged\_relative\_data\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00089\ }
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ logging\ \(\backslash\)'\%s\(\backslash\)'\ |\ \(\backslash\)'\%s\(\backslash\)'\ |\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ time.c\_str(),\ topic.c\_str(),\ message.c\_str());}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ no\ SD\ card\ connected\ when\ logging"{}});}
-\DoxyCodeLine{00094\ \ \ \ \ \}}
-\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ clock\_time\ =\ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_hours())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_minutes())\ +\ \textcolor{stringliteral}{"{}:"{}}\ +\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(\mbox{\hyperlink{logging__util_8cpp_a059cc83bd876c61f940532a2008071e3}{tsp}}-\/>get\_seconds());}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ offset\ =\ std::to\_string(new\_offset);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ time\ =\ \mbox{\hyperlink{logging__util_8cpp_a9af592e268390420308fbf5e719d393a}{tsb}}-\/>get\_date\_time(date,\ clock\_time,\ offset);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ save\ the\ timestamp\ with\ updated\ offset}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a437b44d29a55b718c85988d982c0f809}{time\_stamp\_to\_cache}}\ =\ time;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a9b87f9c41c4be140985330e569dcc999}{log\_to\_sd\_file}}(\mbox{\hyperlink{logging__util_8cpp_a446e0ace32278a3a0ee36f498eb24e04}{logger}},\ time,\ topic,\ message);}
 \DoxyCodeLine{00096\ }
-\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{logging__util_8cpp_a0f9cf039424a99aff815f1fbb03eb9ca}{logged\_relative\_data}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[DEBUG]\ logging\ \(\backslash\)'\%s\(\backslash\)'\ |\ \(\backslash\)'\%s\(\backslash\)'\ |\ \(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ time.c\_str(),\ topic.c\_str(),\ message.c\_str());}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ no\ SD\ card\ connected\ when\ logging"{}});}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

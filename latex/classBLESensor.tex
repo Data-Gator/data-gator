@@ -1,34 +1,70 @@
 \doxysection{BLESensor Class Reference}
 \hypertarget{classBLESensor}{}\label{classBLESensor}\index{BLESensor@{BLESensor}}
+
+
+Defines a bluetooth low energy (BLE) interface for integrating new sensors into the DG firmware.  
+
+
+
+
+{\ttfamily \#include $<$BLESensor.\+hpp$>$}
+
+
+
+Inheritance diagram for BLESensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classBLESensor__inherit__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual std\+::string \mbox{\hyperlink{classBLESensor_a9c0a5c6ada095fc656bdd5d78a7ea6b9}{to\+JSON}} (double temp, double humidity)=0
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string \mbox{\hyperlink{classBLESensor_a9c0a5c6ada095fc656bdd5d78a7ea6b9}{to\+JSON}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} temp, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} humidity)=0
 \begin{DoxyCompactList}\small\item\em convert data values to JSON string object \end{DoxyCompactList}\item 
-\Hypertarget{classBLESensor_af4d3cf1953981ad13c48b85ea2ed10fd}\label{classBLESensor_af4d3cf1953981ad13c48b85ea2ed10fd} 
-virtual std\+::string {\bfseries get\+Sensor\+Type} ()=0
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string \mbox{\hyperlink{classBLESensor_af4d3cf1953981ad13c48b85ea2ed10fd}{get\+Sensor\+Type}} ()=0
 \begin{DoxyCompactList}\small\item\em get the sensor type as a string \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{classBLESensor_a0eb762442cb39216a69ada83f741332e}\label{classBLESensor_a0eb762442cb39216a69ada83f741332e} 
 std\+::string {\bfseries name}
-\begin{DoxyCompactList}\small\item\em sensor name \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Name of the sensor... not unique, generally something generic such as brand and model. \end{DoxyCompactList}\item 
 \Hypertarget{classBLESensor_adf6c41c8d739fbd333ca241ea97c9458}\label{classBLESensor_adf6c41c8d739fbd333ca241ea97c9458} 
 std\+::string {\bfseries mac\+\_\+address}
-\begin{DoxyCompactList}\small\item\em mac address for unique ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Mac address of sensor BLE for unique ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Defines a bluetooth low energy (BLE) interface for integrating new sensors into the DG firmware. 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classBLESensor_af4d3cf1953981ad13c48b85ea2ed10fd}\label{classBLESensor_af4d3cf1953981ad13c48b85ea2ed10fd} 
+\index{BLESensor@{BLESensor}!getSensorType@{getSensorType}}
+\index{getSensorType@{getSensorType}!BLESensor@{BLESensor}}
+\doxysubsubsection{\texorpdfstring{getSensorType()}{getSensorType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string BLESensor\+::get\+Sensor\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+get the sensor type as a string 
+
+Returns a string which identifies the sensor. Usually contains both the generic identifier constructed of brand and model, and the unique MAC address. 
+
+Implemented in \mbox{\hyperlink{classKKMK6P_af6113aa913a331255d771b260db92597}{KKMK6P}}, and \mbox{\hyperlink{classMinewS1_a2a032e460b852f9a20e56f14b9fe7ccc}{Minew\+S1}}.
+
 \Hypertarget{classBLESensor_a9c0a5c6ada095fc656bdd5d78a7ea6b9}\label{classBLESensor_a9c0a5c6ada095fc656bdd5d78a7ea6b9} 
 \index{BLESensor@{BLESensor}!toJSON@{toJSON}}
 \index{toJSON@{toJSON}!BLESensor@{BLESensor}}
 \doxysubsubsection{\texorpdfstring{toJSON()}{toJSON()}}
-{\footnotesize\ttfamily virtual std\+::string BLESensor\+::to\+JSON (\begin{DoxyParamCaption}\item[{double}]{temp,  }\item[{double}]{humidity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string BLESensor\+::to\+JSON (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}}}]{temp,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}}}]{humidity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
 convert data values to JSON string object 
+
+Constructs as JSON formatted string from the data types which are available to be read from the sensor. Defaults to temperature and humidity.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -37,6 +73,10 @@ convert data values to JSON string object
 \mbox{\texttt{ in}}  & {\em humidity} & The humidity as a double in relative humidity \\
 \hline
 \end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classKKMK6P_a62c6be65b79e0897a3024b7ae34c10d3}{KKMK6P}}, and \mbox{\hyperlink{classMinewS1_a465adf6aed5e7cf2e57e609b10d67373}{Minew\+S1}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

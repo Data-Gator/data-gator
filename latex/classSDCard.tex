@@ -12,72 +12,78 @@ Thin wrapper around ESP32 SD card API.
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} = fs\+::\+File
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{using}} \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} = fs\+::\+File
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSDCard_a491caa7cfdbfdf607741662800da2df5}{operator bool}} () const
+\mbox{\hyperlink{classSDCard_a491caa7cfdbfdf607741662800da2df5}{operator bool}} () \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}}
 \item 
-bool \mbox{\hyperlink{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a}{begin}} (uint8\+\_\+t clk\+Pin=\mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}, uint8\+\_\+t miso\+Pin=TT\+\_\+\+MISO, uint8\+\_\+t mosi\+Pin=TT\+\_\+\+MOSI, uint8\+\_\+t ss\+Pin=TT\+\_\+\+SS, SPIClass \texorpdfstring{$\ast$}{*}spi=\&SPI)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a}{begin}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{clk\+Pin}}=\mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{miso\+Pin}}=\mbox{\hyperlink{SDCard_8hpp_afd0a94de84b5a1eb2a26ab401621304d}{TT\+\_\+\+MISO}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{mosi\+Pin}}=\mbox{\hyperlink{SDCard_8hpp_ae18a7f1c328da717441e6c59b76fe654}{TT\+\_\+\+MOSI}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{ss\+Pin}}=\mbox{\hyperlink{SDCard_8hpp_a4a9b42c292db57f7652de07053a17f6c}{TT\+\_\+\+SS}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{SPIClass}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{spi}}=\&\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{SPI}})
 \item 
 \Hypertarget{classSDCard_a0bdc567fbef656f62ba606fa7fb1271b}\label{classSDCard_a0bdc567fbef656f62ba606fa7fb1271b} 
-void {\bfseries end} ()
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} {\bfseries end} ()
 \begin{DoxyCompactList}\small\item\em Terminate connection to SD Card and associated SPI interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} \mbox{\hyperlink{classSDCard_ac582420a0decb16dd633f1d89fb95e9f}{open}} (const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}mode=FILE\+\_\+\+READ, const bool create=false)
+\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} \mbox{\hyperlink{classSDCard_ac582420a0decb16dd633f1d89fb95e9f}{open}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}path, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{mode}}=\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{FILE\+\_\+\+READ}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{create}}=\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{false}})
 \item 
 \Hypertarget{classSDCard_a6072cf673390abc56604eec67f2afd8d}\label{classSDCard_a6072cf673390abc56604eec67f2afd8d} 
-\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} {\bfseries open} (const String \&path, const char \texorpdfstring{$\ast$}{*}mode=FILE\+\_\+\+READ, const bool create=false)
+\mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} {\bfseries open} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&path, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{mode}}=\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{FILE\+\_\+\+READ}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{create}}=\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{false}})
 \end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classSDCard_a1f63ff5b2073e8bdbd1aa7a36ccbaad1}{exists}} (const char \texorpdfstring{$\ast$}{*}path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_a1f63ff5b2073e8bdbd1aa7a36ccbaad1}{exists}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}path)
 \item 
 \Hypertarget{classSDCard_af632e8b1ed377c339f88d6dd92b55424}\label{classSDCard_af632e8b1ed377c339f88d6dd92b55424} 
-bool {\bfseries exists} (const String \&path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} {\bfseries exists} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&path)
 \end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classSDCard_aa79e66efab6a35751ab76e9beb228dc4}{remove}} (const char \texorpdfstring{$\ast$}{*}path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_aa79e66efab6a35751ab76e9beb228dc4}{remove}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}path)
 \item 
 \Hypertarget{classSDCard_a207becca74cd61785655631d38de3774}\label{classSDCard_a207becca74cd61785655631d38de3774} 
-bool {\bfseries remove} (const String \&path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} {\bfseries remove} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&path)
 \end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classSDCard_a144e869ec9090712af70cc724b4d0c56}{rename}} (const char \texorpdfstring{$\ast$}{*}path\+From, const char \texorpdfstring{$\ast$}{*}path\+To)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_a144e869ec9090712af70cc724b4d0c56}{rename}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{path\+From}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{path\+To}})
 \item 
 \Hypertarget{classSDCard_ab4f61d542bb1df1349bf7ceea814efbb}\label{classSDCard_ab4f61d542bb1df1349bf7ceea814efbb} 
-bool {\bfseries rename} (const String \&path\+From, const String \&path\+To)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} {\bfseries rename} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{path\+From}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{path\+To}})
 \end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classSDCard_ab1c42bab450f6cefe48108c822224783}{mkdir}} (const char \texorpdfstring{$\ast$}{*}path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_ab1c42bab450f6cefe48108c822224783}{mkdir}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}path)
 \item 
 \Hypertarget{classSDCard_af8082646331f9d228b0ec59302c1cd9d}\label{classSDCard_af8082646331f9d228b0ec59302c1cd9d} 
-bool {\bfseries mkdir} (const String \&path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} {\bfseries mkdir} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&path)
 \end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classSDCard_a207de663a509e1bd081374dcf5fd02e8}{rmdir}} (const char \texorpdfstring{$\ast$}{*}path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} \mbox{\hyperlink{classSDCard_a207de663a509e1bd081374dcf5fd02e8}{rmdir}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}path)
 \item 
 \Hypertarget{classSDCard_a0ed6f3a3cdaf7c4d40f316d534352d91}\label{classSDCard_a0ed6f3a3cdaf7c4d40f316d534352d91} 
-bool {\bfseries rmdir} (const String \&path)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} {\bfseries rmdir} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{String}} \&path)
 \end{DoxyCompactItemize}
 
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classSDCard_a147a5c9ef57e9b96d6449687ec6a9e01}\label{classSDCard_a147a5c9ef57e9b96d6449687ec6a9e01} 
+fs\+::\+SDFS \texorpdfstring{$\ast$}{*} {\bfseries m\+Card}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -85,25 +91,21 @@ Thin wrapper around ESP32 SD card API.
 
 Only works with ESP32 Arduino framework
 
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Future versions should support other platforms/frameworks. \end{DoxyRefDesc}
-
-
 \doxysubsection{Member Typedef Documentation}
 \Hypertarget{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}\label{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5} 
 \index{SDCard@{SDCard}!File@{File}}
 \index{File@{File}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{File}{File}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{SDCard\+::\+File}} =  fs\+::\+File}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{using}} \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{SDCard\+::\+File}} =  fs\+::\+File}
 
-File implements close(), read(), write(), fs implements open, etc. 
+File implements \doxylink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{close()}, read(), \doxylink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{write()}, fs implements open, etc. 
 
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a}\label{classSDCard_a57ebf5bfc693902817ecdf9cf6bbbc6a} 
 \index{SDCard@{SDCard}!begin@{begin}}
 \index{begin@{begin}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{begin()}{begin()}}
-{\footnotesize\ttfamily bool SDCard\+::begin (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{clk\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}},  }\item[{uint8\+\_\+t}]{miso\+Pin = {\ttfamily TT\+\_\+MISO},  }\item[{uint8\+\_\+t}]{mosi\+Pin = {\ttfamily TT\+\_\+MOSI},  }\item[{uint8\+\_\+t}]{ss\+Pin = {\ttfamily TT\+\_\+SS},  }\item[{SPIClass \texorpdfstring{$\ast$}{*}}]{spi = {\ttfamily \&SPI} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::begin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}}}]{clk\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_ac1d1adf6cdfcb89ed0db748c8fdc5762}{TT\+\_\+\+CLK}}},  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}}}]{miso\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_afd0a94de84b5a1eb2a26ab401621304d}{TT\+\_\+\+MISO}}},  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}}}]{mosi\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_ae18a7f1c328da717441e6c59b76fe654}{TT\+\_\+\+MOSI}}},  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{uint8\+\_\+t}}}]{ss\+Pin = {\ttfamily \mbox{\hyperlink{SDCard_8hpp_a4a9b42c292db57f7652de07053a17f6c}{TT\+\_\+\+SS}}},  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{SPIClass}} \texorpdfstring{$\ast$}{*}}]{spi = {\ttfamily \&\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{SPI}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Function to connect to an SD card using the specified pins and SPI interface.
 
@@ -127,7 +129,7 @@ true if interface setup worked false otherwise.
 \index{SDCard@{SDCard}!exists@{exists}}
 \index{exists@{exists}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{exists()}{exists()}}
-{\footnotesize\ttfamily bool SDCard\+::exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::exists (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Check to see if path exists.
 
@@ -143,7 +145,7 @@ true if path exists false otherwise.
 \index{SDCard@{SDCard}!mkdir@{mkdir}}
 \index{mkdir@{mkdir}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{mkdir()}{mkdir()}}
-{\footnotesize\ttfamily bool SDCard\+::mkdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::mkdir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Create a directory
 
@@ -161,7 +163,7 @@ true if path was created false otherwise.
 \index{SDCard@{SDCard}!open@{open}}
 \index{open@{open}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{open()}{open()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} SDCard\+::open (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{mode = {\ttfamily FILE\+\_\+READ},  }\item[{const bool}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSDCard_a82aa5e80c1bb4637dbbc857673f63ce5}{File}} SDCard\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{mode = {\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{FILE\+\_\+\+READ}}},  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}}}]{create = {\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Open and possibly create a file.
 
@@ -181,7 +183,7 @@ File interface.
 \index{SDCard@{SDCard}!operator bool@{operator bool}}
 \index{operator bool@{operator bool}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
-{\footnotesize\ttfamily SDCard\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+{\footnotesize\ttfamily SDCard\+::operator \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
 
 Operator to test if properly initialized. \begin{DoxyReturn}{Returns}
 true if connected to the SD interface. 
@@ -190,7 +192,7 @@ true if connected to the SD interface.
 \index{SDCard@{SDCard}!remove@{remove}}
 \index{remove@{remove}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{remove()}{remove()}}
-{\footnotesize\ttfamily bool SDCard\+::remove (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Permantly delete a file or directory
 
@@ -206,7 +208,7 @@ true if path was deleted false otherwise.
 \index{SDCard@{SDCard}!rename@{rename}}
 \index{rename@{rename}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{rename()}{rename()}}
-{\footnotesize\ttfamily bool SDCard\+::rename (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path\+From,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{path\+To }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::rename (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path\+From,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path\+To }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Permantly rename a file or directory
 
@@ -224,7 +226,7 @@ true if path was renamed false otherwise.
 \index{SDCard@{SDCard}!rmdir@{rmdir}}
 \index{rmdir@{rmdir}!SDCard@{SDCard}}
 \doxysubsubsection{\texorpdfstring{rmdir()}{rmdir()}}
-{\footnotesize\ttfamily bool SDCard\+::rmdir (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{bool}} SDCard\+::rmdir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{const}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Delete a directory
 

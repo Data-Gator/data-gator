@@ -15,18 +15,21 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{logger_8hpp_a2799093145858620308ff4421e6a1ea3}{log\+\_\+data}} (std\+::string topic, std\+::string message)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} \mbox{\hyperlink{logger_8hpp_a2799093145858620308ff4421e6a1ea3}{log\+\_\+data}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{std\+::string}} topic, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{std\+::string}} message)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}\label{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8} 
-int {\bfseries reset\+\_\+count}
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}{reset\+\_\+count}}
+\begin{DoxyCompactList}\small\item\em number of resets retrieved for NVS \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Logging Utilities for detecting and selecting logging interfaces. 
+
+Defines the high-\/level wrapper for logging data on the Data Gator (DG). Currently this consists of a single function {\ttfamily log\+\_\+data} which takes the data strings to be logged and logs them to all available logging destinations such as MQTT and the SD card.
+
+Data destinations are controlled by whether their \textquotesingle{}is available\textquotesingle{} flag is set to {\ttfamily true}. This flag is first set in the user configuration files but can be overridden if the interface cannot be initialized during setup.
 
 \begin{DoxyAuthor}{Author}
 Garret Wells 
@@ -38,11 +41,13 @@ Garret Wells
 \index{logger.hpp@{logger.hpp}!log\_data@{log\_data}}
 \index{log\_data@{log\_data}!logger.hpp@{logger.hpp}}
 \doxysubsubsection{\texorpdfstring{log\_data()}{log\_data()}}
-{\footnotesize\ttfamily void log\+\_\+data (\begin{DoxyParamCaption}\item[{std\+::string}]{topic,  }\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} log\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{std\+::string}}}]{topic,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{std\+::string}}}]{message }\end{DoxyParamCaption})}
 
 Helper function that handles all data logging to MQTT and the SD card automatically.
 
-IF (there is a Wi\+Fi connection) -\/\texorpdfstring{$>$}{>} log to MQTT broker IF (there is a SD card) -\/\texorpdfstring{$>$}{>} log to SD card
+IF (there is a Wi\+Fi connection) -\/\texorpdfstring{$>$}{>} log to MQTT broker
+
+IF (there is a SD card) -\/\texorpdfstring{$>$}{>} log to SD card
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -51,3 +56,17 @@ IF (there is a Wi\+Fi connection) -\/\texorpdfstring{$>$}{>} log to MQTT broker 
 \mbox{\texttt{ in}}  & {\em message} & The message to log, likely JSON object \\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8}\label{logger_8hpp_a2df27a00b191de3537c3b53adcecf1e8} 
+\index{logger.hpp@{logger.hpp}!reset\_count@{reset\_count}}
+\index{reset\_count@{reset\_count}!logger.hpp@{logger.hpp}}
+\doxysubsubsection{\texorpdfstring{reset\_count}{reset\_count}}
+{\footnotesize\ttfamily int reset\+\_\+count\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+number of resets retrieved for NVS 
+
+External variable holding the number of resets recorded by the system. Stored and loaded from non-\/volatile storage. 

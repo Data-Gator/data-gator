@@ -3,129 +3,129 @@
 \mbox{\hyperlink{mqtt__util_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}SDReader.hpp"{}}}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\_command}}(\textcolor{keywordtype}{string}\ command,\ \textcolor{keywordtype}{string}\ message)\{}
-\DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{if}(command\ ==\ \textcolor{stringliteral}{"{}get\_time\_range"{}})\{}
-\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ message\ to\ json\ structure}}
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ StaticJsonDocument<256>\ doc;}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ deserializeJson(doc,\ message);}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ page\_size;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ JsonArray\ topic\_filter\_ja\ =\ \{\};}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ time\_range;}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}page\_size"{}}))\{}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'page\_size\(\backslash\)'\ so\ using\ default\ size\ of\ 20"{}});}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ page\_size\ =\ 20;}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ page\_size\ =\ doc[\textcolor{stringliteral}{"{}page\_size"{}}];\ }
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}time\_range"{}}))\{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'time\_range\(\backslash\)'\ so\ quitting"{}});}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ time\_range\ =\ doc[\textcolor{stringliteral}{"{}time\_range"{}}].as<\textcolor{keywordtype}{string}>();}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}topic\_filter"{}}))\{}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'topic\_filter\(\backslash\)'\ so\ using\ default\ \(\backslash\)"{}\(\backslash\)"{}"{}});}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_ja.add(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <ArduinoJson.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{SDReader_8hpp}{SDReader.hpp}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\_command}}(\textcolor{keywordtype}{string}\ command,\ \textcolor{keywordtype}{string}\ message)\{}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordflow}{if}(command\ ==\ \textcolor{stringliteral}{"{}get\_time\_range"{}})\{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ message\ to\ json\ structure}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ StaticJsonDocument<256>\ doc;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ deserializeJson(doc,\ message);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ page\_size;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ JsonArray\ topic\_filter\_ja\ =\ \{\};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ time\_range;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}page\_size"{}}))\{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{src_2main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'page\_size\(\backslash\)'\ so\ using\ default\ size\ of\ 20"{}});}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ page\_size\ =\ 20;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ page\_size\ =\ doc[\textcolor{stringliteral}{"{}page\_size"{}}];\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}time\_range"{}}))\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{src_2main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'time\_range\(\backslash\)'\ so\ quitting"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00053\ }
 \DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_ja\ =\ doc[\textcolor{stringliteral}{"{}topic\_filter"{}}];}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ time\_range\ =\ doc[\textcolor{stringliteral}{"{}time\_range"{}}].as<\textcolor{keywordtype}{string}>();}
 \DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ empty\ topic\ filter\ vector}}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ vector<string>\ topic\_filter\_v\ =\ \{\};}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ topic\ filter\ jason\ array\ to\ vector}}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(JsonVariant\ n\ :\ topic\_filter\_ja)\{}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_v.push\_back(n.as<\textcolor{keywordtype}{string}>());}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ parse\ time\ range\ string\ for\ epochs}}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ampersand\_pos\ =\ time\_range.find(\textcolor{stringliteral}{"{}\&"{}});}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ epoch\ =\ time\_range.substr(0,\ ampersand\_pos);}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ terminus\ =\ time\_range.substr(ampersand\_pos+1);}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ TimeStamp*\ ep\ =\ NULL;}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ TimeStamp*\ term\ =\ NULL;}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ strings\ to\ TimeStamp\ objects}}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(epoch.find(\textcolor{stringliteral}{"{}T"{}})\ !=\ string::npos)\{}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ ep\ =\ \textcolor{keyword}{new}\ TimeStamp(epoch);}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ ep\ =\ \textcolor{keyword}{new}\ TimeStamp(stoi(epoch));}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!doc.containsKey(\textcolor{stringliteral}{"{}topic\_filter"{}}))\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{src_2main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[ERROR]\ MQTT\ command\ \(\backslash\)'get\_time\_range\(\backslash\)'\ missing\ key\ \(\backslash\)'topic\_filter\(\backslash\)'\ so\ using\ default\ \(\backslash\)"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_ja.add(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_ja\ =\ doc[\textcolor{stringliteral}{"{}topic\_filter"{}}];}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ empty\ topic\ filter\ vector}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ vector<string>\ topic\_filter\_v\ =\ \{\};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ topic\ filter\ jason\ array\ to\ vector}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(JsonVariant\ n\ :\ topic\_filter\_ja)\{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_v.push\_back(n.as<\textcolor{keywordtype}{string}>());}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ parse\ time\ range\ string\ for\ epochs}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ampersand\_pos\ =\ time\_range.find(\textcolor{stringliteral}{"{}\&"{}});}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ epoch\ =\ time\_range.substr(0,\ ampersand\_pos);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ terminus\ =\ time\_range.substr(ampersand\_pos+1);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}*\ ep\ =\ NULL;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}*\ term\ =\ NULL;}
 \DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(terminus.find(\textcolor{stringliteral}{"{}T"{}})\ !=\ string::npos)\{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ term\ =\ \textcolor{keyword}{new}\ TimeStamp(terminus);}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ term\ =\ \textcolor{keyword}{new}\ TimeStamp(stoi(terminus));}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ convert\ strings\ to\ TimeStamp\ objects}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(epoch.find(\textcolor{stringliteral}{"{}T"{}})\ !=\ string::npos)\{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ ep\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}(epoch);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ ep\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}(stoi(epoch));}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[DEBUG]\ pulling\ data\ range"{}});}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ if(USB\_DEBUG)\{}}
-\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print("{}[DEBUG]\ process\ command\ has\ "{});}}
-\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ double\ perc\ =\ ESP.getFreeHeap();}}
-\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(perc);}}
-\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.println("{}\ free\ bytes"{});}}
-\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ read\ data\ from\ files\ and\ upload\ via\ MQTT}}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ SDReader\ sdr;}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ sdr.read\_entry\_range\_from\_files(}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *ep,\ }
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *term,\ }
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_v,}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ page\_size);}
-\DoxyCodeLine{00105\ }
-\DoxyCodeLine{00106\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ \{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}[DEBUG]\ unkown\ command\ \(\backslash\)'"{}});}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(command.c\_str());}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)'"{}});}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \ \ \ \ \}}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[DEBUG]\ finished\ processing\ MQTT\ command"{}});}
-\DoxyCodeLine{00117\ \}}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00130\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mqtt__util_8hpp_aeab2f678ad886fb7a6c48a77ce97d410}{callback}}(\textcolor{keywordtype}{char}*\ topic,\ \textcolor{keywordtype}{byte}*\ message,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ length)\{}
-\DoxyCodeLine{00131\ \ \ \ \ std::string\ msg\_str;}
-\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ i++)\{}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ msg\_str\ +=\ (char)message[i];}
-\DoxyCodeLine{00134\ \ \ \ \ \}}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00136\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[MQTT]\ Received\ \(\backslash\)'\%s\(\backslash\)'|\(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ topic,\ msg\_str.c\_str());}
-\DoxyCodeLine{00137\ }
-\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ TODO:\ check\ if\ something\ needs\ to\ be\ done\ when\ receiving\ MQTT\ packets}}
-\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ parse\ command}}
-\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{string}\ topic\_s\ =\ topic;}
-\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{int}\ mac\_id\_pos\ =\ topic\_s.find(\textcolor{stringliteral}{"{}/"{}},\ 15);}
-\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{string}\ command\ =\ topic\_s.substr(14,\ mac\_id\_pos\ -\/\ 14);}
-\DoxyCodeLine{00143\ \ \ \ }
-\DoxyCodeLine{00144\ \ \ \ \ \textcolor{comment}{//\ parse\ mac\ id}}
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{string}\ mac\_id\ =\ topic\_s.substr(mac\_id\_pos\ +\ 1);}
-\DoxyCodeLine{00146\ }
-\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ check\ if\ MAC\ is\ match\ before\ processing\ command}}
-\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}(WiFi.macAddress().c\_str()\ ==\ mac\_id)\{}
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\_command}}(command,\ msg\_str);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(terminus.find(\textcolor{stringliteral}{"{}T"{}})\ !=\ string::npos)\{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ term\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}(terminus);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ term\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classTimeStamp}{TimeStamp}}(stoi(terminus));}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}[DEBUG]\ pulling\ data\ range"{}});}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ if(USB\_DEBUG)\{}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print("{}[DEBUG]\ process\ command\ has\ "{});}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ double\ perc\ =\ ESP.getFreeHeap();}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(perc);}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ Serial.println("{}\ free\ bytes"{});}}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ read\ data\ from\ files\ and\ upload\ via\ MQTT}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSDReader}{SDReader}}\ sdr;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ sdr.\mbox{\hyperlink{classSDReader_ae1ff6ea4a001d3e97cad56136815c4fa}{read\_entry\_range\_from\_files}}(}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *ep,\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *term,\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ topic\_filter\_v,}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ page\_size);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{src_2main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}[DEBUG]\ unkown\ command\ \(\backslash\)'"{}});}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(command.c\_str());}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\(\backslash\)'"{}});}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{src_2main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\_DEBUG}})\ Serial.println(\textcolor{stringliteral}{"{}[DEBUG]\ finished\ processing\ MQTT\ command"{}});}
+\DoxyCodeLine{00124\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00146\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{mqtt__util_8hpp_aeab2f678ad886fb7a6c48a77ce97d410}{callback}}(\textcolor{keywordtype}{char}*\ topic,\ \textcolor{keywordtype}{byte}*\ message,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ length)\{}
+\DoxyCodeLine{00147\ \ \ \ \ std::string\ msg\_str;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ length;\ i++)\{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ msg\_str\ +=\ (char)message[i];}
 \DoxyCodeLine{00150\ \ \ \ \ \}}
 \DoxyCodeLine{00151\ }
-\DoxyCodeLine{00152\ \ \ \ \ }
-\DoxyCodeLine{00153\ \}}
+\DoxyCodeLine{00152\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}[MQTT]\ Received\ \(\backslash\)'\%s\(\backslash\)'|\(\backslash\)'\%s\(\backslash\)'\(\backslash\)n"{}},\ topic,\ msg\_str.c\_str());}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ TODO:\ check\ if\ something\ needs\ to\ be\ done\ when\ receiving\ MQTT\ packets}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{comment}{//\ parse\ command}}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{string}\ topic\_s\ =\ topic;}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{int}\ mac\_id\_pos\ =\ topic\_s.find(\textcolor{stringliteral}{"{}/"{}},\ 15);}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{string}\ command\ =\ topic\_s.substr(14,\ mac\_id\_pos\ -\/\ 14);}
+\DoxyCodeLine{00159\ \ \ \ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ parse\ mac\ id}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{string}\ mac\_id\ =\ topic\_s.substr(mac\_id\_pos\ +\ 1);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{comment}{//\ check\ if\ MAC\ is\ match\ before\ processing\ command}}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{if}(WiFi.macAddress().c\_str()\ ==\ mac\_id)\{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\_command}}(command,\ msg\_str);}
+\DoxyCodeLine{00166\ \ \ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ }
+\DoxyCodeLine{00169\ \}}
 
 \end{DoxyCode}

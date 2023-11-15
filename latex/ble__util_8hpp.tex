@@ -34,6 +34,13 @@ class \mbox{\hyperlink{classScanCallbacks}{Scan\+Callbacks}}
 \doxysubsection{Detailed Description}
 Utilities such as callbacks for parsing bluetooth packets. 
 
+\hypertarget{ble__util_8hpp_autotoc_md0}{}\doxysubsection{\texorpdfstring{Basic Functional Summary}{Basic Functional Summary}}\label{ble__util_8hpp_autotoc_md0}
+The callback {\ttfamily on\+Result()} receives data from advertising sensors and then checks if that packet belongs to a known/supported sensor. If so, then the data is parsed and logged using the logging utils in \doxylink{logger_8hpp}{logger.\+hpp}.\hypertarget{ble__util_8hpp_autotoc_md1}{}\doxysubsection{\texorpdfstring{Integration}{Integration}}\label{ble__util_8hpp_autotoc_md1}
+All BLE supported BLE sensors should be integrated with their own class which inherits from \doxylink{BLESensor_8hpp}{BLESensor.\+hpp}. The class should also implement a function {\ttfamily \texorpdfstring{$<$}{<}sensor class\texorpdfstring{$>$}{>}.advertised\+Device\+Is\texorpdfstring{$<$}{<}sensor type\texorpdfstring{$>$}{>}(dev)} which parses the data packet and returns true if identified as an instance of that sensor type.
+
 \begin{DoxyAuthor}{Author}
 Garrett Wells 
 \end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 
+\end{DoxyDate}

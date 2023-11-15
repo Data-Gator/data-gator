@@ -12,7 +12,7 @@ Include dependency graph for mqtt\+\_\+util.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=329pt]{mqtt__util_8hpp__incl}
+\includegraphics[width=350pt]{mqtt__util_8hpp__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
@@ -25,9 +25,9 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\+\_\+command}} (string command, string message)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} \mbox{\hyperlink{mqtt__util_8hpp_af503a762a7f7c077ed92d0fede656a03}{process\+\_\+command}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{string}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{command}}, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{string}} message)
 \begin{DoxyCompactList}\small\item\em Process a command execute it. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{mqtt__util_8hpp_aeab2f678ad886fb7a6c48a77ce97d410}{callback}} (char \texorpdfstring{$\ast$}{*}topic, byte \texorpdfstring{$\ast$}{*}message, unsigned int length)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} \mbox{\hyperlink{mqtt__util_8hpp_aeab2f678ad886fb7a6c48a77ce97d410}{callback}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}topic, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{byte}} \texorpdfstring{$\ast$}{*}message, \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{unsigned}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{int}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{length}})
 \begin{DoxyCompactList}\small\item\em Called when MQTT message is passed to the device by the broker. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -35,6 +35,12 @@ void \mbox{\hyperlink{mqtt__util_8hpp_aeab2f678ad886fb7a6c48a77ce97d410}{callbac
 Utilities for receiving and sending MQTT commands. 
 
 Utilities and interface for receiving MQTT messages from the broker. Also used to request data logged to the u\+SD card from the device.
+
+
+\begin{DoxyEnumerate}
+\item defines a basic callback to attach to the MQTT client object to handle received messages.
+\item defines a function to check and take proper action on commands received via MQTT.
+\end{DoxyEnumerate}
 
 \begin{DoxyAuthor}{Author}
 Garrett Wells 
@@ -46,7 +52,7 @@ Garrett Wells
 \index{mqtt\_util.hpp@{mqtt\_util.hpp}!callback@{callback}}
 \index{callback@{callback}!mqtt\_util.hpp@{mqtt\_util.hpp}}
 \doxysubsubsection{\texorpdfstring{callback()}{callback()}}
-{\footnotesize\ttfamily void callback (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{topic,  }\item[{byte \texorpdfstring{$\ast$}{*}}]{message,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{char}} \texorpdfstring{$\ast$}{*}}]{topic,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{byte}} \texorpdfstring{$\ast$}{*}}]{message,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{unsigned}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{int}}}]{length }\end{DoxyParamCaption})}
 
 
 
@@ -54,11 +60,15 @@ Called when MQTT message is passed to the device by the broker.
 
 Prints command and message to serial interface, then parses the MQTT packet and processes the command.
 
+Commands are defined as a anything published to the {\ttfamily datagator/cmd/\#} topic tree. The {\ttfamily \#} symbol is an MQTT regex glob symbol that matches all MAC addresses. It tells the DG to subscribe to all commands published to ALL DGs.
+
+The command is only processed in {\ttfamily process\+\_\+command(...)} if the MAC address in the topic, such as {\ttfamily datagator/cmd/\+AC\+:45...} matches the MAC of this DG.
+
 
 \begin{DoxyParams}[1]{Parameters}
- & {\em topic} & The topic the message was published on \\
+\mbox{\texttt{ in}}  & {\em topic} & The topic the message was published on \\
 \hline
- & {\em message} & The message in the MQTT packet \\
+\mbox{\texttt{ in}}  & {\em message} & The message in the MQTT packet \\
 \hline
 \mbox{\texttt{ in}}  & {\em length} & The length of the message \\
 \hline
@@ -67,7 +77,7 @@ Prints command and message to serial interface, then parses the MQTT packet and 
 \index{mqtt\_util.hpp@{mqtt\_util.hpp}!process\_command@{process\_command}}
 \index{process\_command@{process\_command}!mqtt\_util.hpp@{mqtt\_util.hpp}}
 \doxysubsubsection{\texorpdfstring{process\_command()}{process\_command()}}
-{\footnotesize\ttfamily void process\+\_\+command (\begin{DoxyParamCaption}\item[{string}]{command,  }\item[{string}]{message }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{void}} process\+\_\+command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{string}}}]{command,  }\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{string}}}]{message }\end{DoxyParamCaption})}
 
 
 
@@ -76,9 +86,9 @@ Process a command execute it.
 Checks the command, if the command matches one of the known commands, then the message is processed. The message contains details about how the command should be carried out.
 
 
-\begin{DoxyParams}{Parameters}
-{\em command} & The command as a string. \\
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em command} & The command as a string. \\
 \hline
-{\em message} & The body/message sent with the command. \\
+\mbox{\texttt{ in}}  & {\em message} & The body/message sent with the command. \\
 \hline
 \end{DoxyParams}

@@ -1,14 +1,34 @@
 \doxysection{include/\+BLESensor.hpp File Reference}
 \hypertarget{BLESensor_8hpp}{}\label{BLESensor_8hpp}\index{include/BLESensor.hpp@{include/BLESensor.hpp}}
+
+
+This file implements BLE Sensor generic interface.  
+
+
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=250pt]{BLESensor_8hpp__dep__incl}
+\includegraphics[width=350pt]{BLESensor_8hpp__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classBLESensor}{BLESensor}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Defines a bluetooth low energy (BLE) interface for integrating new sensors into the DG firmware. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file implements BLE Sensor generic interface. 
+
+\doxylink{classBLESensor}{BLESensor} is the parent class for all bluetooth low energy sensors which are currently implemented for the Data Gator firmware architecture.
+
+At this time (Fall 2023), only temperature and humidity sensors are supported, but it is possible that other types could be supported, requiring the parameters passed to to\+JSON(..) to change.
+
+\begin{DoxyAuthor}{Author}
+Garrett Wells 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2022 
+\end{DoxyDate}

@@ -23,7 +23,8 @@ Initializes device and calls routines.
 {\ttfamily \#include $<$Preferences.\+h$>$}\newline
 {\ttfamily \#include $<$NTPClient.\+h$>$}\newline
 {\ttfamily \#include $<$Wi\+Fi\+Udp.\+h$>$}\newline
-Include dependency graph for main.\+cpp\+:\nopagebreak
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -53,13 +54,13 @@ bool {\bfseries maxlipo\+\_\+attached}
 \Hypertarget{main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}\label{main_8cpp_a2df27a00b191de3537c3b53adcecf1e8} 
 int {\bfseries reset\+\_\+count}
 \item 
-const bool \mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\+\_\+\+DEBUG}} = \mbox{\hyperlink{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}}
+const bool \mbox{\hyperlink{main_8cpp_a45a3fd1220b5c8c7557fb18db8c20e50}{USB\+\_\+\+DEBUG}} = DEBUG
 \item 
 \Hypertarget{main_8cpp_afafd0fc922c17c38235820189e1d9b3b}\label{main_8cpp_afafd0fc922c17c38235820189e1d9b3b} 
 Wi\+Fi\+Client {\bfseries wifi\+\_\+client}
 \item 
 Preferences \mbox{\hyperlink{main_8cpp_add9553c173198049d23f8a89fe11142c}{gator\+\_\+prefs}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Reference to non-\/volatile-\/storage on ESP32. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -104,6 +105,10 @@ Interface for the analog to digital converter. ~\newline
 \doxysubsubsection{\texorpdfstring{gator\_prefs}{gator\_prefs}}
 {\footnotesize\ttfamily Preferences gator\+\_\+prefs}
 
+
+
+Reference to non-\/volatile-\/storage on ESP32. 
+
 NVS memory access interface. \Hypertarget{main_8cpp_a106fc9194d62779ffe942b866046530d}\label{main_8cpp_a106fc9194d62779ffe942b866046530d} 
 \index{main.cpp@{main.cpp}!maxlipo@{maxlipo}}
 \index{maxlipo@{maxlipo}!main.cpp@{main.cpp}}
@@ -114,6 +119,6 @@ Interface for the battery fuel gauge. \Hypertarget{main_8cpp_a45a3fd1220b5c8c755
 \index{main.cpp@{main.cpp}!USB\_DEBUG@{USB\_DEBUG}}
 \index{USB\_DEBUG@{USB\_DEBUG}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{USB\_DEBUG}{USB\_DEBUG}}
-{\footnotesize\ttfamily const bool USB\+\_\+\+DEBUG = \mbox{\hyperlink{config_8hpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}}}
+{\footnotesize\ttfamily const bool USB\+\_\+\+DEBUG = DEBUG}
 
 Serial debug enable flag, set in config.\+h 

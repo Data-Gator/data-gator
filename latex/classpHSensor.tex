@@ -9,14 +9,23 @@ Interface for pH sensors.
 
 {\ttfamily \#include $<$p\+HSensor.\+hpp$>$}
 
+
+
+Inheritance diagram for p\+HSensor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpHSensor__inherit__graph}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual double \mbox{\hyperlink{classpHSensor_a38963a5458fb3de87c0c9f20bfce762d}{getpH}} (double voltage)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} \mbox{\hyperlink{classpHSensor_a38963a5458fb3de87c0c9f20bfce762d}{getpH}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{voltage}})
 \begin{DoxyCompactList}\small\item\em Convert voltage reading to pH value. \end{DoxyCompactList}\item 
-virtual std\+::string \mbox{\hyperlink{classpHSensor_a53c7808a2acb51c6c16229762c668be1}{get\+Sensor\+Type}} ()
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string \mbox{\hyperlink{classpHSensor_a53c7808a2acb51c6c16229762c668be1}{get\+Sensor\+Type}} ()
 \begin{DoxyCompactList}\small\item\em Get the sensor type as a string, used for constructing MQTT topics. \end{DoxyCompactList}\item 
-virtual std\+::string \mbox{\hyperlink{classpHSensor_a80a56812e0bbbfc7209f930892671cba}{to\+JSON}} (double voltage)
+\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string \mbox{\hyperlink{classpHSensor_a80a56812e0bbbfc7209f930892671cba}{to\+JSON}} (\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{voltage}})
 \begin{DoxyCompactList}\small\item\em Converts a voltage to a JSON object string for MQTT messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -30,7 +39,7 @@ Defines functional interface for reading from and converting values from pH sens
 \index{pHSensor@{pHSensor}!getpH@{getpH}}
 \index{getpH@{getpH}!pHSensor@{pHSensor}}
 \doxysubsubsection{\texorpdfstring{getpH()}{getpH()}}
-{\footnotesize\ttfamily virtual double p\+HSensor\+::getpH (\begin{DoxyParamCaption}\item[{double}]{voltage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}} p\+HSensor\+::getpH (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}}}]{voltage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -39,11 +48,15 @@ Convert voltage reading to pH value.
 \begin{DoxyReturn}{Returns}
 The pH as a double 
 \end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classAtlasGravitypH_a868f78a657cf1560181908143c928d34}{Atlas\+GravitypH}}, \mbox{\hyperlink{classGenericPH_ad3979c23d161649b438d7c692e2bb075}{Generic\+PH}}, and \mbox{\hyperlink{classAtlasEZOpH_ac843df1ad504e7f68c12ee2d771f2765}{Atlas\+EZOpH}}.
+
 \Hypertarget{classpHSensor_a53c7808a2acb51c6c16229762c668be1}\label{classpHSensor_a53c7808a2acb51c6c16229762c668be1} 
 \index{pHSensor@{pHSensor}!getSensorType@{getSensorType}}
 \index{getSensorType@{getSensorType}!pHSensor@{pHSensor}}
 \doxysubsubsection{\texorpdfstring{getSensorType()}{getSensorType()}}
-{\footnotesize\ttfamily virtual std\+::string p\+HSensor\+::get\+Sensor\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string p\+HSensor\+::get\+Sensor\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -52,11 +65,15 @@ Get the sensor type as a string, used for constructing MQTT topics.
 \begin{DoxyReturn}{Returns}
 The sensor manufacturer and type as a string 
 \end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classAtlasGravitypH_a325e40675f4c4ba581e79ff93154c7a4}{Atlas\+GravitypH}}, \mbox{\hyperlink{classGenericPH_a184797bc7def010c1b13fdf9869e0686}{Generic\+PH}}, and \mbox{\hyperlink{classAtlasEZOpH_aea3c9661bb25197154340c37a8a22f8d}{Atlas\+EZOpH}}.
+
 \Hypertarget{classpHSensor_a80a56812e0bbbfc7209f930892671cba}\label{classpHSensor_a80a56812e0bbbfc7209f930892671cba} 
 \index{pHSensor@{pHSensor}!toJSON@{toJSON}}
 \index{toJSON@{toJSON}!pHSensor@{pHSensor}}
 \doxysubsubsection{\texorpdfstring{toJSON()}{toJSON()}}
-{\footnotesize\ttfamily virtual std\+::string p\+HSensor\+::to\+JSON (\begin{DoxyParamCaption}\item[{double}]{voltage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{virtual}} std\+::string p\+HSensor\+::to\+JSON (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{src_2main_8cpp_a2df27a00b191de3537c3b53adcecf1e8}{double}}}]{voltage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -65,6 +82,10 @@ Converts a voltage to a JSON object string for MQTT messages.
 \begin{DoxyReturn}{Returns}
 A sensor message with voltage as JSON 
 \end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classAtlasEZOpH_ad4a36bff07a18a43a829600e8e09c9c9}{Atlas\+EZOpH}}, \mbox{\hyperlink{classAtlasGravitypH_a0bf08c848fbe645a27425b0dfc299956}{Atlas\+GravitypH}}, and \mbox{\hyperlink{classGenericPH_a2fefd15f093dab781fdd288c917b5764}{Generic\+PH}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

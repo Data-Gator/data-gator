@@ -47,11 +47,12 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 * [Extending Firmware Functionality: New Sensors and Other Fun!](extending_firmware_functionality.md)
 * [Doxygen Documentation for API](https://data-gator.github.io/doxygen_firmware_docs/index.html)
 
-    * if you have doxygen installed on your system, build doxygen docs from code with `doxygen datagator.doxyconfig` from root of repository.
+    * pre-built doxygen docs are available at the link above, but if you have doxygen installed on your system, build local doxygen docs from code with `doxygen datagator.doxyconfig` from root of repository.
 
 * [Guide for Firmware Releases and the Version Tracking System](how_to_make_releases.md)
 * [Guide for Using the Configuration Scripts](Configuration_Files_and_Creating_Profiles.md)
 * [MQTT Topics Documentation](MQTT_Topics.md)
+
 
 # Architecture Description
 
@@ -63,8 +64,8 @@ Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
     * soldered to a carrier board which provides expanded functionality and better connection options 
 
 2. The Carrier Board(Data Gator)
-    * soldered to the MCU, it provides an improved Analog-to-Digital-Converter(ADC), Multiplexer(MUX), power management chips, and Watch-Dog Timer(WDT)
-    * the carrier board also provides screw-terminal interfaces for robust and re-usable connection to wired sensors 
+    * soldered to the MCU, it provides an improved Analog-to-Digital-Converter(ADC), power management chips, and Watch-Dog Timer(WDT)
+    * the carrier board also provides interfaces for robust and re-usable connection to wired sensors
 
 3. The Solar System
     * intended to be used with a battery, solar power manager, and solar panel to provide year-round sustainable operation

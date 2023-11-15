@@ -41,6 +41,7 @@ _**Pre-requisites:** A data gator board with sensors and power supply. If you do
 
 _**Pre-requisites:** A data gator board with sensors and power supply. Also some knowledge of C++ & Arduino concepts. If you don't have these or want to know more about setting them up, see the hardware documentation in [github pages](https://data-gator.github.io/Hardware)_
 
+## Quick Links
 It is assumed if you are a developer, you are interested in doing one of the following or have the skills to do whatever you want.
 
 * [Detailed Firmware Execution Description](firmware_documentation.md)
@@ -52,6 +53,13 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 * [Guide for Firmware Releases and the Version Tracking System](how_to_make_releases.md)
 * [Guide for Using the Configuration Scripts](Configuration_Files_and_Creating_Profiles.md)
 * [MQTT Topics Documentation](MQTT_Topics.md)
+
+
+### Changing Configuration Options and Building a New Firmware Image
+
+### Creating a New Firmware Release/Version
+
+### Adding and Integrating Support For a New Sensor
 
 
 # Architecture Description

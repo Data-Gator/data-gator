@@ -20,6 +20,58 @@ Firmware and pertinent hardware documentation can be found in [`documentation/`]
 | [MQTT and Hardware Documentation Spreadsheet](documentation/MQTT_Topics.md) | Description of MQTT topics and hardware interfaces. |
 | [Espressif Binary Flash Tool for Windows](documentation/Espressif_Flash_Download_Tool.md) | Download links and guide for how to flash firmware releases to the hardware using Espressif's flash tool for Windows. |
 
+# Architecture Description
+
+## High-Level Hardware Description
+Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
+
+1. The Micro-Controller(MCU)
+    * currently an ESP32 based MCU with WiFi, BLE, and GPIO for interfacing with sensors
+    * soldered to a carrier board which provides expanded functionality and better connection options 
+
+2. The Carrier Board(Data Gator)
+    * soldered to the MCU, it provides an improved Analog-to-Digital-Converter(ADC), power management chips, and Watch-Dog Timer(WDT)
+    * the carrier board also provides interfaces for robust and re-usable connection to wired sensors
+
+3. The Solar System
+    * intended to be used with a battery, solar power manager, and solar panel to provide year-round sustainable operation
+    * also includes a fuel gauge solution(MAX17048) to monitor battery charge level
+    * requires a 1-2 Watt solar panel
+
+## Firmware Configuration and Usage
+The firmware is based around a modular architecture which is divided into several main parts:
+
+![png](images/firmware_chart.png)
+
+1. Sensor Interfaces
+    * each physical sensor is abstracted in firmware through its own library and extends one of the sensor APIs ([BLESensor](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html), etc)
+
+        * example: [Teros10](https://data-gator.github.io/doxygen_firmware_docs/classTeros10.html) extends [VWCSensor](https://data-gator.github.io/doxygen_firmware_docs/classVWCSensor.html)
+
+    * a sensor's library/firmware is responsible for reading data from the hardware interface it is connected to (I<sup>2</sup>C, BLE, analog, etc)
+    * sensor interfaces can be easily modified to add support for new sensor hardware without substantial changes to other firmware code - just make sure the MQTT subscriber picks up the new topics! 
+
+2. Task Scheduling
+    * one **task** is defined for each hardware sensor interface (analog, I2C, BLE, etc)
+    * `config.hpp` defines the polling frequency for the tasks in minutes, but should not be edited directly if possible. It is better to follow the instructions from the guide in the table of contents above titled "Configuration Files and Profiles"
+    * the MCU is woken from deep sleep by the WDT to check the scheduling table and execute scheduled tasks
+
+        * time elapsed between tasks is estimated by counting WDT resets (approx. once every 64 seconds).
+
+3. Data Logging
+    * the logging module supports automatic logging to any of the specified interfaces such as Serial connection, MQTT(WiFi), SD card, and potentially LoRa (future)
+    * logging destination is automatically chosen by the module based on what interfaces are available
+
+Further documentation and usage information will be defined in [firmware_documentation.md](firmware_documentation.md). 
+
+
+## Hardware Debugging and Documentation
+Hardware characteristics of the system will be documented in [MQTT_Hardware_Documentation.xlsx](MQTT_Hardware_Documentation.xlsx), especially during development as new features are being added.
+
+Stable feature documentation will later be accessible through [hardware_documentation.md](hardware_documentation.md).
+
+![png](images/hardware_flow_chart.png)
+
 
 ### Fast Start: Compiling and Uploading
 1. To build and upload the current code to the board without modifying:
@@ -54,6 +106,3 @@ Further documentation on this command and PlatformIO's unit testing features can
 
 * [PlatformIO Test Runner](https://docs.platformio.org/en/latest/advanced/unit-testing/runner.html)
 * [`pio test` Command Documentation](https://docs.platformio.org/en/latest/advanced/unit-testing/runner.html)
-
-
-

@@ -2,7 +2,7 @@
 # Data Gator
 Aggregator firmware for Project VineHeart as a PlatformIO project.
 
-- [Fast Start: Compiling and Uploading Firmware to a Board](#fast-start:-compiling-and-uploading)
+- [Fast Start: Compiling and Uploading Firmware to a Board](#fast-start-compiling-and-uploading)
 - [Documentation and Guides](#documentation)
 
 # Aggregators/Data Gators

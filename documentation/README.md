@@ -75,17 +75,19 @@ Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
 The firmware is based around a modular architecture which is divided into several main parts:
 
 1. Sensor Interfaces
-    * sensor interfaces are defined for Bluetooth Low Energy temperature and humidity sensors, Volumetric Water Content(VWC) sensors, and pH sensors
+    * sensor APIs are defined for Bluetooth Low Energy temperature and humidity sensors, Volumetric Water Content(VWC) sensors, and pH sensors (ex. [BLESensor library/class](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html))
     * sensor interfaces are based around the protocol/connection type that they use(I<sup>2</sup>C, BLE, analog, etc)
     * sensor interfaces can be easily modified to add support for new sensor hardware without substantial changes to other firmware code - just make sure the MQTT subscriber picks up the new topics! 
 
 2. Task Scheduling
-    * one task is defined for each sensor that the aggregator is connected to 
+    * one task is defined for each hardware sensor interface (analog, I2C, BLE, etc)
     * `config.hpp` defines the polling frequency for the tasks in minutes, but should not be edited directly if possible. It is better to follow the instructions from the guide in the table of contents above titled "Configuration Files and Profiles"
     * the MCU is woken from deep sleep by the WDT to check the scheduling table and execute scheduled tasks
 
+        * time elapsed between tasks is estimated by counting WDT resets (approx. once every 64 seconds).
+
 3. Data Logging
-    * the logging module supports automatic logging to any of the specified interfaces such as Serial connection, MQTT(WiFi), SD card, and potentially LoRa
+    * the logging module supports automatic logging to any of the specified interfaces such as Serial connection, MQTT(WiFi), SD card, and potentially LoRa (future)
     * logging destination is automatically chosen by the module based on what interfaces are available
 
 Further documentation and usage information will be defined in [firmware_documentation.md](firmware_documentation.md). A flowchart of the modules can be seen below.

@@ -75,12 +75,15 @@ Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
 The firmware is based around a modular architecture which is divided into several main parts:
 
 1. Sensor Interfaces
-    * sensor APIs are defined for Bluetooth Low Energy temperature and humidity sensors, Volumetric Water Content(VWC) sensors, and pH sensors (ex. [BLESensor library/class](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html))
-    * sensor interfaces are based around the protocol/connection type that they use(I<sup>2</sup>C, BLE, analog, etc)
+    * each physical sensor is abstracted in firmware through its own library and extends one of the sensor APIs ([BLESensor](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html), etc)
+
+        * example: [Teros10](https://data-gator.github.io/doxygen_firmware_docs/classTeros10.html) extends [VWCSensor](https://data-gator.github.io/doxygen_firmware_docs/classVWCSensor.html)
+
+    * a sensor's library/firmware is responsible for reading data from the hardware interface it is connected to (I<sup>2</sup>C, BLE, analog, etc)
     * sensor interfaces can be easily modified to add support for new sensor hardware without substantial changes to other firmware code - just make sure the MQTT subscriber picks up the new topics! 
 
 2. Task Scheduling
-    * one task is defined for each hardware sensor interface (analog, I2C, BLE, etc)
+    * one **task** is defined for each hardware sensor interface (analog, I2C, BLE, etc)
     * `config.hpp` defines the polling frequency for the tasks in minutes, but should not be edited directly if possible. It is better to follow the instructions from the guide in the table of contents above titled "Configuration Files and Profiles"
     * the MCU is woken from deep sleep by the WDT to check the scheduling table and execute scheduled tasks
 

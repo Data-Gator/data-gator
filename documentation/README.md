@@ -53,7 +53,7 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 # Architecture Description
 
 ### High-Level Hardware Description
-The hardware solution can be broken into several discrete components:
+Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
 
 1. The Micro-Controller(MCU)
     * currently an ESP32 based MCU with WiFi, BLE, and GPIO for interfacing with sensors

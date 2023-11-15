@@ -47,6 +47,8 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 * [Guide for Using the Configuration Scripts](Configuration_Files_and_Creating_Profiles.md)
 * [MQTT Topics Documentation](MQTT_Topics.md)
 
+# Architecture Description
+
 ### High-Level Hardware Description
 The hardware solution can be broken into several discrete components:
 

@@ -43,6 +43,9 @@ _**Pre-requisites:** A data gator board with sensors and power supply. Also some
 It is assumed if you are a developer, you are interested in doing one of the following or have the skills to do whatever you want.
 
 * [Doxygen Documentation for API](https://data-gator.github.io/doxygen_firmware_docs/index.html)
+
+    * if you have doxygen installed on your system, build doxygen docs from code with `doxygen datagator.doxyconfig` from root of repository.
+
 * [Guide for Firmware Releases and the Version Tracking System](how_to_make_releases.md)
 * [Guide for Using the Configuration Scripts](Configuration_Files_and_Creating_Profiles.md)
 * [MQTT Topics Documentation](MQTT_Topics.md)

@@ -1,8 +1,0 @@
-.pio/build/firebeetle32/libbaa/NimBLE-Arduino/nimble/nimble/host/src/ble_monitor.c.o: \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimble/nimble/host/src/ble_monitor.c \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimble/nimble/host/include/host/ble_monitor.h \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimble/porting/nimble/include/syscfg/syscfg.h \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimble/esp_port/port/include/esp_nimble_cfg.h \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimconfig.h \
- /home/winterrain/.platformio/packages/framework-arduinoespressif32@3.20006.221224/tools/sdk/esp32/dio_qspi/include/sdkconfig.h \
- .pio/libdeps/firebeetle32/NimBLE-Arduino/src/nimconfig_rename.h

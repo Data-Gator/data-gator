@@ -5,13 +5,13 @@ Aggregator firmware for Project VineHeart as a PlatformIO project. Doxygen docum
 ### Compiling and Uploading
 1. To build and upload the current code to the board without modifying:
 
-    pio run -t upload
-    // OR open serial monitor afterward
-    pio run -t upload -t monitor
+        pio run -t upload
+        // OR open serial monitor afterward
+        pio run -t upload -t monitor
 
 2. To generate `include/config.h` with selected network parameters:
 
-    pio run -e config-firebeetle32
+        pio run -e config-firebeetle32
 
 
 ### Unit Tests

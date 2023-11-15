@@ -41,7 +41,7 @@ Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
 ## Firmware Configuration and Usage
 The firmware is based around a modular architecture which is divided into several main parts:
 
-![png](images/firmware_chart.png)
+![png](documentation/images/firmware_chart.png)
 
 1. Sensor Interfaces
     * each physical sensor is abstracted in firmware through its own library and extends one of the sensor APIs ([BLESensor](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html), etc)
@@ -70,7 +70,7 @@ Hardware characteristics of the system will be documented in [MQTT_Hardware_Docu
 
 Stable feature documentation will later be accessible through [hardware_documentation.md](hardware_documentation.md).
 
-![png](images/hardware_flow_chart.png)
+![png](documentation/images/hardware_flow_chart.png)
 
 
 ### Fast Start: Compiling and Uploading

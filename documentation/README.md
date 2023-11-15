@@ -55,7 +55,7 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 
 # Architecture Description
 
-### High-Level Hardware Description
+## High-Level Hardware Description
 Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
 
 1. The Micro-Controller(MCU)
@@ -71,7 +71,7 @@ Hardware documentation in [github pages](https://data-gator.github.io/Hardware).
     * also includes a fuel gauge solution(MAX17048) to monitor battery charge level
     * requires a 1-2 Watt solar panel
 
-### Firmware Configuration and Usage
+## Firmware Configuration and Usage
 The firmware is based around a modular architecture which is divided into several main parts:
 
 ![png](images/firmware_chart.png)
@@ -98,7 +98,7 @@ The firmware is based around a modular architecture which is divided into severa
 Further documentation and usage information will be defined in [firmware_documentation.md](firmware_documentation.md). 
 
 
-### Hardware Debugging and Documentation
+## Hardware Debugging and Documentation
 Hardware characteristics of the system will be documented in [MQTT_Hardware_Documentation.xlsx](MQTT_Hardware_Documentation.xlsx), especially during development as new features are being added.
 
 Stable feature documentation will later be accessible through [hardware_documentation.md](hardware_documentation.md).

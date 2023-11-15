@@ -1,3 +1,6 @@
 [submodule "lib/SDLogger"]
 	path = lib/SDLogger
 	url = https://github.com/Data-Gator/SDLogger.git
+[submodule "config_generator"]
+	path = config_generator
+	url = https://github.com/grwells/config_generator.git

@@ -44,7 +44,7 @@ _**Pre-requisites:** A data gator board with sensors and power supply. Also some
 It is assumed if you are a developer, you are interested in doing one of the following or have the skills to do whatever you want.
 
 * [Detailed Firmware Execution Description](firmware_documentation.md)
-* [Extending Firmware Functionality: New Sensors and Other Fun!](extending_firmware.md)
+* [Extending Firmware Functionality: New Sensors and Other Fun!](extending_firmware_functionality.md)
 * [Doxygen Documentation for API](https://data-gator.github.io/doxygen_firmware_docs/index.html)
 
     * if you have doxygen installed on your system, build doxygen docs from code with `doxygen datagator.doxyconfig` from root of repository.

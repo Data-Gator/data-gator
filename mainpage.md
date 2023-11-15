@@ -9,3 +9,10 @@ When reading this documentation, note that there is documentation both for maint
 ##### Links
 
 [README link here](./README.md)
+
+[Integrating new BLE Sensors](./ble_sensor_integration.md)
+
+[Integrating new Analog Sensors](./analog_sensor_integration.md)
+
+[Integrating new I2C Sensors](./i2c_sensor_integration.md)
+

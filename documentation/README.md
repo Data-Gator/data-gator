@@ -78,7 +78,9 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 ###### Note
 Until the config generator script is run again, every time the firmware is compiled, the values in `include/config.hpp` will be used. Open `config.ini` to check available values or open `include/config.hpp` to check what values are being compiled for use.
 
-* if the script runs, you should see ![config gen ascii](images/config_generator_output.png)
+* if the script runs, you should see 
+
+    ![config gen ascii](images/config_generator_output.png)
         
 
 ### Creating a New Firmware Release/Version

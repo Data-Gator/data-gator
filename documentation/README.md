@@ -135,15 +135,46 @@ Writing firmware to integrate a new sensor requires the following steps:
 
 3. Integrate sensor library with Data Gator task scheduling mechanism.
     
-    - currently the firmware defines four tasks which are run periodically based on `config.hpp` parameters
+    - Currently the firmware defines four tasks which are run periodically based on [`include/config.hpp`](https://data-gator.github.io/doxygen_firmware_docs/config_8hpp.html) parameters.
 
-    - code for reading from a new sensor needs to be integrated (placed) in the one of these tasks, or a new task should be defined for the scheduler to handle and integrated into the [planner struct](https://data-gator.github.io/doxygen_firmware_docs/structplanner.html)
+    - Code for reading from a new sensor needs to be integrated (placed) in the one of these tasks, or a new task should be defined for the scheduler to handle and integrated into the [planner struct](https://data-gator.github.io/doxygen_firmware_docs/structplanner.html).
 
         - _**NOTE:** The caveat to this rule is that BLE sensors should be integrated into [void ScanCallbacks::onResult(...)](https://data-gator.github.io/doxygen_firmware_docs/classScanCallbacks.html) since BLE sensors are detected by the BLE stack and their data packets parsed within this function._
 
-    - tasks are defined in [`include/scheduler.hpp`](https://data-gator.github.io/doxygen_firmware_docs/scheduler_8hpp.html)
-            
-4. Make sure that your code fully supports logging to MQTT using the MQTT topic structure. For this to work properly your sensor class **MUST** overwrite the following methods:
+    - Tasks are defined in [`include/scheduler.hpp`](https://data-gator.github.io/doxygen_firmware_docs/scheduler_8hpp.html).
 
-    - example [std::string BLESensor::getSensorType()](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html)
+4. Define the MQTT topic and message structure for logging/reporting readings from your sensor. You can see examples [here](MQTT_Topics.md).
+
+    - Notice that pre-defined sensor types and interfaces also define a set topic and message structure. In the next step you will write the functions used to fill in all fields such as `<brand_sensormodel>` or `<DG_mac_addr>`.
+        
+        - It is acceptable to **add** more data fields to the message, but to prevent missing key errors pre-defined fields **must** be present in pre-defined topics.
+
+        - When defining a new topic and message structure here are some guidelines:
+
+            1. Only define a new type of sensor topic if the type of data collected by the sensor is different.
+            2. Include identifying data in the topic. For example, if the sensor doesn't provide unique identification data such as a MAC address, use the Data Gator's MAC address as the last topic path field to identify the sensor (ex.  datagator/tlm/<DG_mac_addr>).
+            3. Include identifying information, raw data (voltage or unscaled version), and scaled/converted data in the message body. Including identifying information in the body helps containerize information. Including the unscaled as well as scaled data allows for data cleaning, calculation verification, and other perks.
+            
+5. Define member methods for constructing a MQTT style topic and message. Please follow the convention of overwriting the following methods to provide this functionality:
+
+    - `std::string getSensorType()`
+
+        - _Example:_ [std::string BLESensor::getSensorType()](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html)
+
+        - _`getSensorType` returns the (hopefully unique) name of the sensor so that its data can be identified and tracked_
+        
+    - `std::string toJSON(_data here_)`
+
+        - _Example:_ [std::string Teros10::toJSON(double voltage)](https://data-gator.github.io/doxygen_firmware_docs/classTeros10.html#a3396ce8a397fcb209bcfd041dc561764)
+
+        - _`toJSON(...)` converts from a raw data reading (taken from a hardware resource such as a voltage from the ADC) and converts that value to a string of JSON fields ready to be injected into a JSON object for data logging.
+
+            - This function is likely calling an underlying conversion function such as [`double Teros10::getVWC(...)`](https://data-gator.github.io/doxygen_firmware_docs/classTeros10.html#ad5870a7c628c5531b87d687dee857836) to convert the voltage to a soil water content reading. 
+
+            - Once the voltage has been scaled/converted it is converted to a string so that it can be placed in a JSON object.
+
+
+6. Log the JSON data using the logging utility: [`log_data(string topic, string message)`](https://data-gator.github.io/doxygen_firmware_docs/logger_8hpp.html#a2799093145858620308ff4421e6a1ea3).
+7. Test! Your message should be logged to the serial monitor if the `USB_SERIAL` flag is raised and will be logged to MQTT if there is a WiFi connection and broker.
+
 

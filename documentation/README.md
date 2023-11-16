@@ -114,5 +114,36 @@ If creating a new a new firmware version/release is desired it is necessary to:
 
 ### Adding and Integrating Support For a New Sensor
 
+Writing firmware to integrate a new sensor requires the following steps:
 
+1. Choose a sensor interface to extend or write your own and place it in `include/<sensor_interface>.hpp`. For example, the following are pre-defined interfaces that can be used:
+
+    - [VWCSensor](https://data-gator.github.io/doxygen_firmware_docs/classVWCSensor.html)
+    - [BLESensor](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html)
+    - [pHSensor](https://data-gator.github.io/doxygen_firmware_docs/classpHSensor.html)
+
+2. Next, write a sensor library defining a custom class which inherits from the chosen interface. Your library should be placed in `lib/<sensor_library>`.
+
+        lib/
+            |
+            |
+            +--- <sensor_name>/
+                    |
+                    +--- README.md          # documentation here, including links to product page, manufacturer guides and documentation
+                    +--- <sensor_name>.hpp  # doxygen style comments preferred for incorporation into auto generated documentation, but not required
+                    +--- <sensor_name>.cpp
+
+3. Integrate sensor library with Data Gator task scheduling mechanism.
+    
+    - currently the firmware defines four tasks which are run periodically based on `config.hpp` parameters
+
+    - code for reading from a new sensor needs to be integrated (placed) in the one of these tasks, or a new task should be defined for the scheduler to handle and integrated into the [planner struct](https://data-gator.github.io/doxygen_firmware_docs/structplanner.html)
+
+        - _**NOTE:** The caveat to this rule is that BLE sensors should be integrated into [void ScanCallbacks::onResult(...)](https://data-gator.github.io/doxygen_firmware_docs/classScanCallbacks.html) since BLE sensors are detected by the BLE stack and their data packets parsed within this function._
+
+    - tasks are defined in [`include/scheduler.hpp`](https://data-gator.github.io/doxygen_firmware_docs/scheduler_8hpp.html)
+            
+4. Make sure that your code fully supports logging to MQTT using the MQTT topic structure. For this to work properly your sensor class **MUST** overwrite the following methods:
+
+    - example [std::string BLESensor::getSensorType()](https://data-gator.github.io/doxygen_firmware_docs/classBLESensor.html)
 

@@ -57,6 +57,30 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 
 ### Changing Configuration Options and Building a New Firmware Image
 
+1. Edit `config.ini`. This file can be used to **add** global parameters or **modify** the values of default global definitions. At compile time, options from `config.ini` are used to generate `include/config.hpp` so that the parameters are available in the binary. _(default parameters listed below)_
+
+    * Network ID
+    * Network Password
+    * MQTT Broker IP Address & Port 
+    * Serial Debug Flag 
+    * WiFi Connection Timeout
+    * OTA Update Frequency
+    * Other Task Frequencies
+
+2. Run config generator script with:
+
+        // to generate config.hpp
+        pio run -e debug
+
+3. Use script interface to select a configuration option from menu options which are loaded from `config.ini`. If no options are available, you want to add a configuration, or you want to change some values: repeat step one or refer to [the config guide](./Configuration_Files_and_Creating_Profiles.md).
+
+
+###### Note
+Until the config generator script is run again, every time the firmware is compiled, the values in `include/config.hpp` will be used. Open `config.ini` to check available values or open `include/config.hpp` to check what values are being compiled for use.
+
+* if the script runs, you should see ![config gen ascii](images/config_generator_output.png)
+        
+
 ### Creating a New Firmware Release/Version
 
 ### Adding and Integrating Support For a New Sensor

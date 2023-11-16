@@ -78,12 +78,41 @@ It is assumed if you are a developer, you are interested in doing one of the fol
 ###### Note
 Until the config generator script is run again, every time the firmware is compiled, the values in `include/config.hpp` will be used. Open `config.ini` to check available values or open `include/config.hpp` to check what values are being compiled for use.
 
-* if the script runs, you should see 
+* if the script runs, you should see something similar to:
 
     ![config gen ascii](images/config_generator_output.png)
         
 
 ### Creating a New Firmware Release/Version
 
+If creating a new a new firmware version/release is desired it is necessary to:
+
+1. Choose configuration settings using the [configuration workflow](#changing-configuration-options-and-building-a-new-firmware-image).
+
+2. Increment the firmware version number and build firmware image binary. For example if the current version is v1.0.12 the next version could be v2.0.0 (major release), v1.1.0 (minor release), or v1.0.13 (patch release). To automatically increment version number, run one of the following:
+
+        // for a patch release (bug fixes)
+        pio run -e rpatch
+
+        // minor (non-api breaking changes)
+        pio run -e rminor 
+
+        // major (api breaking changes and major functionality upgrades)
+        pio run -e rmajor
+
+        // last resort to revert undesirable version and choose major, minor, and patch version manually
+        // good for fixing oopsies!
+        // warning overwrites existing version info!
+        pio run -e rmanual
+
+    - in this step, the old version number is retrieved from `include/version.hpp`, incremented and written back
+    - if manual is used, the old version number is simply overwritten
+
+3. Get generated binary from `.pio` directory.
+
+    - after step 2, the binary file will be placed in `.pio/build/<rmajor|rminor|rpatch>/datagator_v<major>.<minor>.<patch>.bin`
+
 ### Adding and Integrating Support For a New Sensor
+
+
 

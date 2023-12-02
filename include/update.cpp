@@ -23,10 +23,13 @@
 using namespace tinyxml2;
 using namespace std;
 
-#define OTA_SERVER "192.168.50.10"
-
-extern const bool USB_DEBUG;
-extern PubSubClient mqtt_client;
+/**
+ * Static IP address for the server hosting the firmware update
+ * files.
+ */
+#define OTA_SERVER "192.168.50.10" //!< Over-The-Air update server address
+extern const bool USB_DEBUG;        
+extern PubSubClient mqtt_client;    //!< MQTT client object for logging
 
 /**
  * @brief Check if server has different firmware version.
@@ -128,7 +131,7 @@ void update_started(){
  * @brief Log update process finished.
  *
  * Notifies the MQTT broker and prints the update finished message to the serial
- * line.
+ * line. Only printed if successful.
  */
 void update_finished(){
 	if(USB_DEBUG) Serial.println("update finished");
@@ -155,11 +158,22 @@ void update_error(int err) {
     instance.mailMessage(&mqtt_client, topic, msg);
 }
 
-/*
+/**
  * @brief Attempts OTA firmware update from server. 
  *
- * Check current firmware version on server, if newer then update.
- * 		Example from HTTPUpdate library
+ * Checks current firmware version on server, if _different_ then update.
+ * 	Based on concepts from an example in the HTTPUpdate library.
+ *
+ * This allows firmware upgrades AND downgrades. Attempts an update from
+ * the server three times before continuing.
+ *
+ * Attaches three event callback functions to the httpUpdate object. Each
+ * callback function publishes debug messages which can be retrieved from 
+ * a MQTT debug topic `datagator/ota/<MAC address>` as well as the serial
+ * output.
+ *
+ * If serial debugging is available, the server url can be checked in serial 
+ * output.
  */
 void attempt_update() {
 	std::string file_name = new_firmware_version_available();

@@ -1,3 +1,10 @@
+/**
+ * @file KKM_K6P.hpp
+ * @brief Contains the definition of the KKM K6P BLE sensor, which is based on the BLESensor.hpp interface.
+ * 
+ * @author Garrett Wells
+ * @date 2022
+ */
 #ifndef KKMK6P_H
 #define KKMK6P_H 
 
@@ -9,15 +16,39 @@
 #include <NimBLEAdvertisedDevice.h>
 #include <MQTTMailer.hpp>
 
-#define ENDIAN_CHANGE_U16(x) ((((x)&0xFF00)>>8) + (((x)&0xFF)<<8))
+//!< Converts endianess for 16 bit integers
+#define ENDIAN_CHANGE_U16(x) ((((x)&0xFF00)>>8) + (((x)&0xFF)<<8)) 
+//!< Converts endianess for 32 bit integers
 #define ENDIAN_CHANGE_U32(x) ((((x)&0xFF000000)>>24) + (((x)&0x00FF0000)>>8)) + ((((x)&0xFF00)<<8) + (((x)&0xFF)<<24))
 
 extern const bool USB_DEBUG;
 
+/**
+ * @brief Defines structure for floating point numbers in dual 8 bit upper/lower format.
+ *
+ * Uses the toString member to convert the upper and lower 8 bit values to a string
+ * of format `<upper>.<lower>` to represent a double.
+ *
+ * For example:
+ *
+ * ```cpp
+ * // note this is pseudo code!
+ * ufloat88.upper = 2
+ * ufloat88.lower = 5
+ *
+ * str a = ufloat88.toString() // value of a = "2.5"
+ * ```
+ *
+ */
 typedef struct ufloat88 {
-    int8_t upper = 0x00;
-    uint8_t lower = 0x00;
+    int8_t upper = 0x00;    //!<  the value to the left of the decimal point
+    uint8_t lower = 0x00;   //!< the value to the right of the decimal point
 
+    /**
+     * @brief Convert struct members upper and lower to a string double value
+     *
+     * @returns A string value of form `<upper_int>.<lower_int>`.
+     */
     std::string toString(){
         std::stringstream ss;
 
@@ -27,8 +58,8 @@ typedef struct ufloat88 {
 
 } __attribute__((packed)) ufloat88;
 
-/*
- * Singleton used to identify and parse BLE transmissions from KKMK6P BLE Temperature and Humidity sensors.
+/**
+ * @brief Singleton used to identify and parse BLE transmissions from KKMK6P BLE Temperature and Humidity sensors.
  */
 class KKMK6P: public BLESensor{
 public:

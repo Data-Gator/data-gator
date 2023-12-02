@@ -3,9 +3,21 @@
  * @brief Initializes device and calls routines.
  *
  * Uses the Arduino framework to initialize devices and call 
- * routines to collect data and manage power.
+ * routines to collect data and manage power. This file is required for compilation
+ * in the Arduino framework. Furthermore it contains implementations of the Arduino
+ * required functions `setup()` and `loop()`. 
  *
- * @defgroup   MAIN main
+ * The Arduino model of execution has been adapted to fit a different executional model
+ * which prioritizes intermittent, low power data collection. Arduino defaults to running the 
+ * code within loop an infinite number of times until the device is stopped or runs out of a resource
+ * such as power. 
+ *
+ * In many precision agriculture scenarios the rate of change of any monitored variable such as
+ * temperature likely needs to be polled no more than once a minute. Any more than this
+ * degree of resolution is probably a waste of energy. To accomodate this norm, the Data Gator (DG) 
+ * firmware is configured to run the code in loop _**once**_ and then shutdown (enter low power mode)
+ * to conserve battery life.
+ *
  *
  * @brief      This file implements main.
  *
@@ -37,25 +49,36 @@
 #include <WiFiUdp.h>
 
 /** Interface for the analog to digital converter.  */
-extern Adafruit_ADS1115 ads;        
+extern Adafruit_ADS1115 ads; //!< Analog to digital converter object (I2C)
 /** Interface for the battery fuel gauge. */
-extern Adafruit_MAX17048 maxlipo;
-extern bool maxlipo_attached;
-extern int reset_count;
+extern Adafruit_MAX17048 maxlipo; //!< MAX17048 battery Fuel Gauge
+/** External flag indicating whether maxlipo was initialized successfully. */
+extern bool maxlipo_attached; //!< Fuel Gauge successfully initialized?
+/** External variable holding the number of resets recorded by the system. Stored and loaded from non-volatile storage. */
+extern int reset_count; //!< number of resets retrieved for NVS
 
 
 /** Serial debug enable flag, set in config.h */
-const bool USB_DEBUG = DEBUG; 
+const bool USB_DEBUG = DEBUG; //!< USB serial debugging enabled
 
-WiFiClient wifi_client;
-PubSubClient mqtt_client(wifi_client);
+WiFiClient wifi_client; //!< WiFi stack object
+PubSubClient mqtt_client(wifi_client); //!< MQTT client object
 /** NVS memory access interface. */
-Preferences gator_prefs;
+Preferences gator_prefs; //!< NVS memory object
 
 /**
  * @brief Setup initializes sensor interfaces, NVS, wireless protocols, and logging options.
  * 
- * This is a more detailed description.
+ * This function initializes all global resources and bus based protocols. A list (non-exhaustive but pretty complete)
+ * can be found below:
+ *
+ *  1. initializes gpio pins,
+ *  2. initializes i2c sensors,
+ *  3. starts serial debug interface and waits 1 sec (defaults to 115200 baud),
+ *  4. initializes the non-volatile memory system (specific to ESP32, adapt for other uC), 
+ *  5. initializes wireless connections,
+ *  6. initializes logging systems and configures flags based on what logging interfaces are available.
+ *
  */
 void setup(){
 
@@ -80,8 +103,11 @@ void setup(){
 /**
  * @brief Read sensors, log data, and hibernate.
  *
- * Although specified to loop infinitely, this function reads sensors, logs data, and finishes by putting
- * the system into hibernation to conserve energy.
+ * Although specified to loop infinitely by the Arduino API, this function does the following in one iteration:
+ *  
+ *  1. reads sensors, 
+ *  2. logs data, 
+ *  3. and finishes by putting the system into hibernation to conserve energy.
  *
  */
 void loop(){
@@ -127,10 +153,3 @@ void loop(){
 
 }
 
-/**
- * @mainpage Project Description
- *
- * \section intro_sec Introduction
- * This is the documentation for the Data Gator firmware. It may be used as a detailed reference for extending and 
- * improving firmware for the system.
- */

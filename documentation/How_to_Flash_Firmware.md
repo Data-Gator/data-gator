@@ -3,20 +3,38 @@ This is a guide for how to flash firmware images onto ESP32 mounted on the Datag
 
 In this guide, flashing refers to uploading an executable(binary) file to the ESP32 micro-controller. It is possible to do this with two different tools:
 
-1. [PlatformIO] This method is most tightly integrated with the firmware development environment used by the developers and is easiest when it is necessary to build from source and then upload. It can be used through both command line and visual studio.
-2. [Espressif Flash Tool(Windows)] Using the espressif flash tool is the best and only method for flashing pre-compiled executable files included with releases. Unfortunately this is only available for Windows.
+1. [PlatformIO](#platformio) This method is most tightly integrated with the firmware development environment used by the developers and is easiest when it is necessary to build from source and then upload. It can be used through both command line and visual studio.
+2. [Espressif Flash Tool(Windows)](#espressif-flash-download-tool) Using the espressif flash tool is the best and only method for flashing pre-compiled executable files included with releases. Unfortunately this is only available for Windows.
 
 
-### Deployment
+# PlatformIO
 
 ##### PlatformIO Options
 With laptop connected to Data Gator, build and upload the source code with:
 
 1. VSCode Plugin
-2. OR `pio run -t upload` from the command line
-3. OR Espressif Flash Tool
+2. OR use platformio CLI tool `pio`
 
-##### Espressif Flash Download Tool
+Currently, it doesn't appear possible to flash pre-built firmware images to a board without building in PlatformIO. For mass production, it is recommended that you use the Espressif Flash Tool.
+
+## PlatformIO with VSCode
+
+## PlatformIO CLI
+
+1. Simple compile and upload (flash): `pio run -t upload`
+
+2. For serial monitor use: `pio run -t upload -t monitor`
+
+3. To build with different configuration options: `pio run -t debug`
+
+    * change how often sensors read, network options, etc
+
+
+###### Note
+There are many other options for PlatformIO's CLI and some configuration scripts are integrated to help manage projects. Instructions for using the configuration manager system and version control system for Data Gator firmware releases can be found under [developer workflows](./README.md#workflow-for-firmware-developers).
+
+
+# Espressif Flash Download Tool
 To flash the linked firmware, use the Espressif Flash Download Tool(Windows) from [here](https://www.espressif.com/en/support/download/other-tools).
 
 1. Download and open Flash Download Tool. Also download the binary file (`.bin`) linked below.

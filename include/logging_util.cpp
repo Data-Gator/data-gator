@@ -1,10 +1,25 @@
 /**
  * @brief Utilities for logging data.
  *
+ * # Summary
  * Define the helper functions/utilities which have been written for 
  *  logging data on the Data Gators.
  *
- * Emphasis is placed on making this as simple to use as possible.
+ * Emphasis is placed on making this as simple to use as possible. Unfortunately it is likely
+ *  that the implementation is rather difficult to follow due to the number of edge
+ *  cases covered. These include: 
+ *
+ *  * multiple logging interfaces(SD, WiFi, etc)
+ *  * cases where network connection is not available to obtain timestamp for data 
+ *
+ *  ### Key Functionality
+ *  Key functionality includes functions for:
+ *
+ *  1. caching and retreiving data from NVS 
+ *      * timestamps 
+ *      * log offsets (calculated from # of resets)
+ *  2. constructing file names for logging 
+ *  3. logging to SD card file
  *
  * @author Garrett Wells
  * @file logging_util.cpp
@@ -16,18 +31,26 @@
 #include <SDReader.hpp>
 
 // interface to NVM access
-extern Preferences gator_prefs;
-bool logging_available = false;
-bool absolute_timestamp_available = false;
-bool logged_relative_data = false;
+extern Preferences gator_prefs; //!< Reference to non-volatile-storage on ESP32
+bool logging_available = false; //!< is some logging interface available?
+/**< Flag showing that some logging interface is available. May be uSD card or MQTT. */
+bool absolute_timestamp_available = false; //!< is an exact/accurate timestamp available?
+/**< Flag set during initialization, indicates that WiFi connection to NTP for update was obtained. */
+bool logged_relative_data = false; //!< relatively accurate timestamp used, last exact timestamp + # of minutes/resets elapsed         
+/**< Flag set to indicate that no network connection was available for NTP update to get precise timestamp. */
 
-std::string time_stamp_to_cache = "";
+std::string time_stamp_to_cache = ""; //!< the formatted timestamp to write to non-volatile memory for next reset
+/**< 
+ * The timestamp, last exact timestamp + offset to write to non-volatile storage. 
+ * This timestamp will be retrieved on next reset and replaced if network connection to NTP available. If NTP not
+ * available, then the offset is incremented.
+ * */
 
 // SDLogger 
-SDLogger* logger = NULL;        // reads and writes to files
+SDLogger* logger = NULL;        //!< reads and writes to files
 // TimeStamp
-TimeStampBuilder* tsb = NULL;   // builds timestamp strings
-TimeStampParser* tsp = NULL;    // parses timestamp strings
+TimeStampBuilder* tsb = NULL;   //!< builds timestamp strings
+TimeStampParser* tsp = NULL;    //!< parses timestamp strings
 
 // uSD Utilities
 //bool is_sd_attached(void);                      // check if there is an sd card connected
@@ -104,7 +127,9 @@ bool init_data_logger(){
  * Generate a file name based on the current time stamp. Should only be 
  *  called if TimeStampBuilder has been updated.
  *
- *  @param TimeStampParser which defines parser for reading the current time stamp from a string.
+ *  @param[in] tsp TimeStampParser which defines parser for reading the current time stamp from a string.
+ *
+ *  @returns a constructed filename `log_<month>-<day>-<year>`
  */
 std::string get_log_filename(TimeStampParser* tsp){
     if(tsp == NULL) return "";
@@ -120,7 +145,7 @@ std::string get_log_filename(TimeStampParser* tsp){
  * Cache/update the last known absolute timestamp from the NTPClient
  *  to non-volatile memory
  *
- *  @param timestamp a timestamp string following the syntax of TimeStampBuilder
+ *  @param[in] timestamp A timestamp string following the syntax of TimeStampBuilder
  */
 void cache_timestamp(std::string timestamp){
     // cache string 
@@ -130,7 +155,7 @@ void cache_timestamp(std::string timestamp){
 /**
  * Save the reset count.
  *
- * @param int The offset in ticks.
+ * @param[in] log_offset The offset in ticks.
  */
 void cache_log_offset(int log_offset){
     gator_prefs.putInt("log_offset", log_offset);
@@ -176,10 +201,10 @@ int cache_retrieve_log_offset(void){
 /**
  * Write an MQTT message to a file on the SD card. Requires a time stamp and filename.
  *
- * @param The string file name to log the topic and message to.
- * @param The string time, formatted according to TimeStampBuilder.
- * @param The string topic, according to MQTT format.
- * @param The message which contains data. Often JSON object.
+ * @param [in] filename The string file name to log the topic and message to.
+ * @param [in] time string time, formatted according to TimeStampBuilder.
+ * @param [in] topic The topic, according to MQTT format.
+ * @param [in] message The message which contains data. Often JSON object.
  */
 void log_to_sd_file(std::string filename, std::string time, std::string topic, std::string message){
     std::string log_fn = filename;
@@ -214,15 +239,15 @@ void log_to_sd_file(std::string filename, std::string time, std::string topic, s
 /**
  * Write an MQTT message to a file on the SD card. Requires a time stamp and filename.
  *
- * @param       The SDLogger instance with all filename and separator
+ * @param[in] l The SDLogger instance with all filename and separator
  *                  information pre-set
  *
- * @param The time hr:min:sec+offset that will be written to the 
+ * @param[in] time The time hr:min:sec+offset that will be written to the 
  *                  log file
  *
- * @param    The mqtt topic the data should have been logged to
+ * @param[in] topic  The mqtt topic the data should have been logged to
  *
- * @param  The mqtt message containing the data we want to save
+ * @param[in] message  The mqtt message containing the data we want to save
  *
  */
 void log_to_sd_file(SDLogger* l, std::string time, std::string topic, std::string message){

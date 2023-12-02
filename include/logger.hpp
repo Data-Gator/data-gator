@@ -1,6 +1,15 @@
 /**
  * @brief Logging Utilities for detecting and selecting logging interfaces.
  *
+ * Defines the high-level wrapper for logging data on the Data Gator (DG). Currently
+ * this consists of a single function `log_data` which takes the data strings to be
+ * logged and logs them to all available logging destinations such as MQTT and the 
+ * SD card. 
+ *
+ * Data destinations are controlled by whether their 'is available' flag is set
+ * to `true`. This flag is first set in the user configuration files but can be 
+ * overridden if the interface cannot be initialized during setup.
+ *
  * @author Garret Wells
  * @file logger.hpp
  */
@@ -14,6 +23,7 @@ extern int reset_count;
  *  the SD card automatically.
  *
  * IF (there is a WiFi connection) -> log to MQTT broker
+ *
  * IF (there is a SD card) -> log to SD card
  *
  * @param[in] topic     The MQTT topic to log

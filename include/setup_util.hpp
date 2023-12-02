@@ -8,8 +8,8 @@
 #define SETUP_UTIL_H
 
 // Preferences Access Modes
-#define RO_MODE true
-#define RW_MODE false
+#define RO_MODE true //!< define read only access mode for SD card files
+#define RW_MODE false //!< define read/write access mode for SD card files
 
 #include <scheduler.hpp>
 
@@ -28,8 +28,8 @@ Adafruit_ADS1115 ads;
 Adafruit_MAX17048 maxlipo;
 bool maxlipo_attached = true;
 // NTP Client
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
+WiFiUDP ntpUDP;                 //!< WiFi stack object to pass to the NTPClient
+NTPClient timeClient(ntpUDP); //!< network time protocol object to get current time
 
 extern int reset_count;
 

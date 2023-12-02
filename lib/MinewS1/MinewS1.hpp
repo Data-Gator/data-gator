@@ -1,3 +1,10 @@
+/**
+ * @file MinewS1.hpp
+ * @brief Implementation of the Minew S1 bluetooth sensor family. Extends BLESensor.hpp.
+ *
+ * @author Garrett Wells
+ * @date 2022
+ */
 #ifndef MINEW_S1_H
 #define MINEW_S1_H
 
@@ -14,8 +21,8 @@
 
 extern const bool USB_DEBUG;
 
-/*
- * Singleton used to identify and parse BLE transmissions from Minew S1 BLE Temperature and Humidity sensors.
+/**
+ * @brief Singleton used to identify and parse BLE transmissions from MinewS1 BLE Temperature and Humidity sensors. Inherits from BLESensor.hpp.
  */
 class MinewS1: public BLESensor{
 public:
@@ -29,12 +36,39 @@ public:
 	bool advertisedDeviceIsS1(NimBLEAdvertisedDevice* dev); // true if the data in this payload is from S1
 	MQTTMail* parseAdvertisedData(NimBLEAdvertisedDevice* dev); // get the data from a scanned device
 
+    /**
+     * @brief Read the temperature from the sensor data packet
+     */
 	float getTemp();
+
+    /**
+     * @brief Read the humidity from the sensor data packet
+     */
 	float getHumidity();
+
+    /**
+     * @brief Read the sensor's battery voltage from the sensor data packet
+     */
 	int getVoltage();
+
+    /**
+     * @brief Read the time the sensor has been running from the sensor data packet
+     */
 	uint32_t timeUp();
+
+    /**
+     * @brief Read the sensor BLE MAC address from the sensor data packet
+     */
 	BLEAddress getMAC();
+
+    /**
+     * @brief Convert temperature and humidity values to a JSON object string
+     */
 	std::string toJSON(double temp, double humidity); 	// export all known information to json string object
+                                                        //
+    /**
+     * @brief Get the string identifier for the sensor brand and model
+     */
 	std::string getSensorType();
 
 
@@ -44,6 +78,9 @@ private:
 								NimBLEUUID("0000fff1-0000-1000-8000-00805f9b34fb"),	// Eddystone URL
 								NimBLEUUID("0000feaa-0000-1000-8000-00805f9b34fb")};	// Eddystone TLM
 
+    /**
+     * @brief HT data struct
+     */
     struct { // HT data
 		uint8_t id = 0x00;			// payload id
 		uint16_t unknown = 0x0000;	// 2 bytes of useless data
@@ -64,6 +101,9 @@ private:
 
     } __attribute__((packed)) HT_Frame;
 
+    /**
+     * @brief Info struct
+     */
     struct { // INFO data
 		uint8_t id = 0x00;			// payload id
 		uint16_t unknown = 0x0000;	// 2 bytes of useless data
@@ -87,6 +127,9 @@ private:
 
     } __attribute__((packed)) INFO_Frame;
 
+    /**
+     * @brief Eddystone struct
+     */
     struct { // Eddystone Telemetry data
     	uint8_t frameType = 0x00; 	// eddystone frame specifier
 		uint8_t version = 0x00;		// version...
@@ -110,6 +153,9 @@ private:
 
     } __attribute__((packed)) TLM_Frame;
 
+    /**
+     * @brief iBeacon struct
+     */
     struct { // iBeacon UUID, Major, & Minor data
     	uint8_t manufacturerID[6];
 

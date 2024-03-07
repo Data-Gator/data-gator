@@ -14,3 +14,6 @@ latex/
 **/*.cb
 **/*.cb2
 **/*.lb
+
+# Exclude Visual Studio Code settings
+.vscode/

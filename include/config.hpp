@@ -27,3 +27,5 @@
 #define HT_FREQ 5
 /** Ticks/minutes between device telemetry reports */
 #define TLM_FREQ 5
+/** Ticks/minutes between dendrometer sensor readings*/
+#define DENDRO_FREQ 5

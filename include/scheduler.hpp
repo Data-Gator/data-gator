@@ -20,9 +20,11 @@
 #include <OWMAdafruit_ADS1015.h>
 #include <ble_util.hpp>
 #include <VWCSensor.hpp>
+#include <dendroSensor.hpp>
 #include <Teros10.hpp>
 #include <Atlas_EZO-pH.hpp>
 #include <Atlas_Gravity_pH.hpp>
+#include <MIJ02LMS.hpp>
 
 extern bool maxlipo_attached;
 extern Adafruit_MAX17048 maxlipo;
@@ -84,7 +86,7 @@ void init_nvs(){
 
 }
 
-/**
+/**Preheat
  * @brief Check if a task will run this time, NVS must be initialized first!
  *
  * @param[in] reset_count The number of resets recorded.
@@ -96,8 +98,9 @@ bool task_is_scheduled(int reset_count){
     bool run_ht = reset_count - planner.ht_t0 >= HT_FREQ;
     bool run_ota_update = reset_count - planner.ota_t0 >= OTA_FREQ;
     bool run_tlm = reset_count - planner.tlm_t0 >= TLM_FREQ;
+	bool run_dendro = reset_count - planner.analog_t0 >= DENDRO_FREQ;
 
-    if( run_vwc || run_ht || run_ota_update || run_tlm){
+    if( run_vwc || run_ht || run_ota_update || run_tlm || run_dendro){
         // start WIFI
         return true;
     }else return false;
@@ -137,7 +140,9 @@ void ReadWired(){
 	VWCSensor* vwc_converter = new Teros10();
 	pHSensor* pH_converter = new AtlasGravitypH();
     AtlasEZOpH* ezopH_converter = new AtlasEZOpH();
+	DendroSensor *dendro_converter = new MIJ02LMS(4095, "MIJ_02_LMS_Dendrometer");
 
+	// initialize MQTT mailer
 	MQTTMailer instance = MQTTMailer::getInstance();
     // get the MAC address
 	std::string mac_str(WiFi.macAddress().c_str());
@@ -253,6 +258,14 @@ void ReadWired(){
 		//instance.mailMessage(&mqtt_client, topic, msg);
         log_data(topic, msg);
 	}
+
+	// build dendrometer mqtt message
+	std::string dendro_brand = dendro_converter->getSensorType();
+	std::string dendro_topic = dendro_brand + "/3/" + mac_str;
+	std::string msg = "{\"MAC\": \"" + mac_str + "\", \"dendrometer\", " + dendro_converter->toJSON(voltage[3]) + "}";
+
+	log_data(dendro_topic, msg);
+	free(dendro_converter);
 	free(vwc_converter);
 }
 

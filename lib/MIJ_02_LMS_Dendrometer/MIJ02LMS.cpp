@@ -28,12 +28,12 @@ MIJ02LMS::MIJ02LMS(const double maxResolution, const std::string sensorType) : m
  * @param rawADC The raw analog value read from the sensor (e.g. 0-4095, 0-1023, etc.)
  * @return double The diameter of the tree in micrometers (um)
  */
-double MIJ02LMS::getUM(const double rawADC)
+double MIJ02LMS::getUM(const double voltage)
 {
     // Vpre = Vin * 1000.0: convert volts to mV (e.g. 3300.0mV for 3.3V)
     // dr = (11000 * (Vout / (Vpre)) / (1 + sqrt(2)))
     // return 11000.0 * (this->calculateMV(rawADC) / 3300.0) / (1 + M_SQRT2);
-    return 11000.0 * (this->calculateMV(rawADC) / VPRE_MV) / (1 + M_SQRT2);
+    return 11000.0 * ((voltage * 1000.0) / VPRE_MV) / (1 + M_SQRT2);
 }
 
 /**
@@ -52,27 +52,27 @@ std::string MIJ02LMS::getSensorType()
  * @param rawADC The raw analog value read from the sensor (e.g. 0-4095, 0-1023, etc.)
  * @return std::string A JSON string of the sensor's data
  */
-std::string MIJ02LMS::toJSON(const double rawADC, const double rawPreheatADC)
+std::string MIJ02LMS::toJSON(const double voltage)
 {
-    return "\"rawADC\": " + std::to_string(rawADC) + ", \"uM\":" + std::to_string(this->getUM(rawADC));
+    return "\"DENDRO_RAW\": " + std::to_string(voltage) + ", \"uM\":" + std::to_string(this->getUM(voltage));
 }
 
-/**
- * @brief Returns the voltage of the sensor in millivolts (mV)
- *
- * @param rawADC The raw analog value read from the sensor (e.g. 0-4095 (12-bits), 0-1023 (10-bits), etc.)
- * @return double The voltage of the sensor in millivolts (mV)
- */
-double MIJ02LMS::calculateMV(const double rawADC)
-{
-    // calculate the voltage
-    double voltage = rawADC * (3.3 / mMaxResolution);
-    // Serial.println("Voltage: " + String(voltage));
-    double voltageMV = voltage * 1000.0;
-    // Serial.println("VoltageMV: " + String(voltageMV));
-    return voltageMV;
-    // return ((rawADC / mMaxResolution) * mRefVoltage) * 1000.0;
-}
+// /**
+//  * @brief Returns the voltage of the sensor in millivolts (mV)
+//  *
+//  * @param rawADC The raw analog value read from the sensor (e.g. 0-4095 (12-bits), 0-1023 (10-bits), etc.)
+//  * @return double The voltage of the sensor in millivolts (mV)
+//  */
+// double MIJ02LMS::calculateMV(const double voltage)
+// {
+//     // calculate the voltage
+//     // double voltage = voltage * (3.3 / mMaxResolution);
+//     // Serial.println("Voltage: " + String(voltage));
+//     double voltageMV = voltage * 1000.0;
+//     // Serial.println("VoltageMV: " + String(voltageMV));
+//     return voltageMV;
+//     // return ((rawADC / mMaxResolution) * mRefVoltage) * 1000.0;
+// }
 
 /**
  * @brief Returns the preheat voltage of the sensor in millivolts (mV)

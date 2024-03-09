@@ -20,11 +20,11 @@ class MIJ02LMS : public DendroSensor
 public:
     MIJ02LMS(const double maxResolution, const std::string sensorType);
     ~MIJ02LMS(){};                                     // Empty default Destructor
-    double getUM(const double rawADC) override;              // Returns the analog value read from the sensor
+    double getUM(const double voltage) override;              // Returns the analog value read from the sensor
     std::string getSensorType() override;              // Returns the name of the sensor
-    std::string toJSON(const double voltage, const double rawPreheatADC) override; // Returns a JSON string of the sensor's data
+    std::string toJSON(const double voltage) override; // Returns a JSON string of the sensor's data
     // double calculatePreheatMV(const double rawPreheatADC); // Returns the preheat voltage of the sensor
-    double calculateMV(const double rawADC); // Returns the voltage of the sensor
+    // double calculateMV(const double voltage); // Returns the voltage of the sensor
 protected:
     // double mRefVoltage; // Known reference voltage
     double mMaxResolution; // Known maximum resolution

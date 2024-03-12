@@ -348,8 +348,9 @@ void Scheduler(int reset_count){
     bool run_ht = reset_count - planner.ht_t0 >= HT_FREQ;
     bool run_ota_update = reset_count - planner.ota_t0 >= OTA_FREQ;
     bool run_tlm = reset_count - planner.tlm_t0 >= TLM_FREQ;
+	bool run_dendro = reset_count - planner.analog_t0 >= DENDRO_FREQ;
 
-	if(run_vwc){
+	if(run_vwc || run_dendro){
 		ReadWired();
 		planner.analog_t0 = reset_count;
 		gator_prefs.putInt("analog_t0", planner.analog_t0);
@@ -378,6 +379,7 @@ void Scheduler(int reset_count){
         mqtt_client.loop();
 	}
 
+	PatWDT();
 }
 
 /**

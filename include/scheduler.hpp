@@ -260,9 +260,9 @@ void ReadWired(){
 	}
 
 	// build dendrometer mqtt message
-	std::string dendro_brand = dendro_converter->getSensorType();
-	std::string dendro_topic = dendro_brand + "/3/" + mac_str;
-	std::string msg = "{\"MAC\": \"" + mac_str + "\", \"dendrometer\", " + dendro_converter->toJSON(voltage[3]) + "}";
+	// std::string dendro_brand = dendro_converter->getSensorType();
+	std::string dendro_topic = dendro_converter->getSensorType() + "/3_dendrometer/" + mac_str;
+	std::string msg = "{\"MAC\": \"" + mac_str + "\", " + dendro_converter->toJSON(voltage[3]) + "}";
 
 	log_data(dendro_topic, msg);
 	free(dendro_converter);

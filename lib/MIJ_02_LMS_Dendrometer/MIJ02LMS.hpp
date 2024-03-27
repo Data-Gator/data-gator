@@ -12,7 +12,8 @@
 // Standard Library Includes
 #include <../../include/dendroSensor.hpp>
 
-#define VPRE 3.3 // Preheat Voltage
+// since the voltage to the sensor seems to maintain around 3.0V, this value is hardcoded currently
+#define VPRE 3.0 // Preheat Voltage
 #define VPRE_MV (VPRE * 1000.0) // Preheat Voltage in mV
 
 class MIJ02LMS : public DendroSensor

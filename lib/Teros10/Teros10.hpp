@@ -11,8 +11,10 @@
 
 #include <Arduino.h>
 #include <../../include/VWCSensor.hpp>
+#include <../../include/AnalogSensor.hpp>
 
-class Teros10: public VWCSensor{
+class Teros10 : public AnalogSensor, public VWCSensor
+{
 private:
 	int analog_pin; // pin the sensor is connected to and can be read from
 	int pwr_pin;	// pin that must be powered to read from the sensor
@@ -31,6 +33,7 @@ public:
 
 	std::string getSensorType();
 	double apparentDialectricPermitivity(); // read dialectric permitivity which can then be converted to VWC using Topp equation
+	double calculate(const double voltage) { return getVWC(MINERAL_SOIL, voltage); }; // calculate the VWC from the voltage read from the sensor
 };
 
 #endif

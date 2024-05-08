@@ -20,7 +20,8 @@
 #include <OWMAdafruit_ADS1015.h>
 #include <ble_util.hpp>
 #include <VWCSensor.hpp>
-#include <dendroSensor.hpp>
+#include <SensorFactory.hpp>
+#include <AnalogSensor.hpp>
 #include <Teros10.hpp>
 #include <Atlas_EZO-pH.hpp>
 #include <Atlas_Gravity_pH.hpp>
@@ -29,6 +30,9 @@
 extern bool maxlipo_attached;
 extern Adafruit_MAX17048 maxlipo;
 extern Adafruit_ADS1115 ads;
+
+// create a sensor factory for analog sensors
+SensorFactory sensorFactory;
 
 int reset_count = -1; // times reset by WDT, one tick roughly equivalent to one minute
 
@@ -136,17 +140,19 @@ void ReadWired(){
 	digitalWrite(PWR_EN, HIGH);
 	delay(10000);
 
+	// create an array of AnalogSensor pointers
+	// AnalogSensor** sensors = sensorFactory.getAnalogSensors();
+
     // initialize sensor readers
-	VWCSensor* vwc_converter = new Teros10();
+	// VWCSensor* vwc_converter = new Teros10();
 	pHSensor* pH_converter = new AtlasGravitypH();
     AtlasEZOpH* ezopH_converter = new AtlasEZOpH();
-	DendroSensor *dendro_converter = new MIJ02LMS(4095, "MIJ_02_LMS_Dendrometer");
+	// AnalogSensor* dendro_converter = new MIJ02LMS();
 
 	// initialize MQTT mailer
 	MQTTMailer instance = MQTTMailer::getInstance();
     // get the MAC address
 	std::string mac_str(WiFi.macAddress().c_str());
-
     
 	int raw_analog[4];
 	double voltage[4];
@@ -231,42 +237,57 @@ void ReadWired(){
 	digitalWrite(PWR_EN, LOW);
 
 	// build VWC mqtt message
-	std::string brand = vwc_converter->getSensorType();
+	// std::string brand = vwc_converter->getSensorType();
 
 	if(WiFi.status() == WL_CONNECTED && !mqtt_client.connected()){
 		if(DEBUG) Serial.println("\t-> not connected");
 		instance.reconnect(mqtt_client);
 	}
 
-	for(int i = 0; i < 3; i++){
+	// for(int i = 0; i < 4; i++){
 
-		std::string depth = "";
-		switch(i){
-			case 0:
-				depth = "shallow";
-				break;
-			case 1:
-				depth = "middle";
-				break;
-			case 2:
-				depth = "deep";
-				break;
-		}
+	// 	std::string depth = "";
+	// 	switch(i){
+	// 		case 0:
+	// 			depth = "shallow";
+	// 			break;
+	// 		case 1:
+	// 			depth = "middle";
+	// 			break;
+	// 		case 2:
+	// 			depth = "deep";
+	// 			break;
+	// 	}
 		
-		std::string topic = brand + "/" + std::to_string(i) + std::string("_") + depth + std::string("/") + mac_str;
-		std::string msg = "{\"MAC\": \"" + mac_str + "\", \"DEPTH\": \"" + depth + "\", " + vwc_converter->toJSON(voltage[i]) + "}";
-		//instance.mailMessage(&mqtt_client, topic, msg);
-        log_data(topic, msg);
+	// 	std::string topic = brand + "/" + std::to_string(i) + std::string("_") + depth + std::string("/") + mac_str;
+	// 	std::string msg = "{\"MAC\": \"" + mac_str + "\", \"DEPTH\": \"" + depth + "\", " + vwc_converter->toJSON(voltage[i]) + "}";
+	// 	//instance.mailMessage(&mqtt_client, topic, msg);
+    //     log_data(topic, msg);
+	// }
+
+	// get reference to the analog sensors vector
+	const auto& sensors = sensorFactory.getAnalogSensors();
+	
+	// iterate over the analog sensors and build the mqtt message, then send it
+	for (int i = 0; i < 4; i++)
+	{
+		if (sensors[i] != nullptr)
+		{
+			std::string brand = sensors[i]->getSensorType();
+			std::string topic = "analog_port_" + std::to_string(i + 1) + "/" + brand + "/" + mac_str;
+			std::string msg = "{\"MAC\": \"" + mac_str + "\", " + sensors[i]->toJSON(voltage[i]) + "}";
+			log_data(topic, msg);
+		}
 	}
 
 	// build dendrometer mqtt message
 	// std::string dendro_brand = dendro_converter->getSensorType();
-	std::string dendro_topic = dendro_converter->getSensorType() + "/3_dendrometer/" + mac_str;
-	std::string msg = "{\"MAC\": \"" + mac_str + "\", " + dendro_converter->toJSON(voltage[3]) + "}";
+	// std::string dendro_topic = dendro_converter->getSensorType() + "/3_dendrometer/" + mac_str;
+	// std::string msg = "{\"MAC\": \"" + mac_str + "\", " + dendro_converter->toJSON(voltage[3]) + "}";
 
-	log_data(dendro_topic, msg);
-	free(dendro_converter);
-	free(vwc_converter);
+	// log_data(dendro_topic, msg);
+	// free(dendro_converter);
+	// free(vwc_converter);
 }
 
 /**

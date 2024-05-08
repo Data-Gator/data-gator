@@ -66,6 +66,8 @@ PubSubClient mqtt_client(wifi_client); //!< MQTT client object
 /** NVS memory access interface. */
 Preferences gator_prefs; //!< NVS memory object
 
+extern SensorFactory sensorFactory; //!< Sensor factory object
+
 /**
  * @brief Setup initializes sensor interfaces, NVS, wireless protocols, and logging options.
  * 
@@ -93,10 +95,14 @@ void setup(){
 	init_nvs();
     Serial.printf("FIRMWARE VERSION v%i.%i.%i\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
     // connect to WiFi, BLE, etc
+    delay(10000);
     setup_wireless_connections();
     // detect logging options (MQTT, SD card, etc)
     setup_logging();
 
+    // initialize the sensor factory
+    sensorFactory = SensorFactory();
+    sensorFactory.begin();
 }
 
 

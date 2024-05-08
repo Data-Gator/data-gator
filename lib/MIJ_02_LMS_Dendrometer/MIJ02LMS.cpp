@@ -9,6 +9,11 @@
 #include <MIJ02LMS.hpp>
 
 /**
+ * @brief Default Constructor
+ */
+MIJ02LMS::MIJ02LMS() : mMaxResolution(4095.0), mSensorType("mij_02_lms_dendrometer") {}
+
+/**
  * @brief Construct a new MIJ02LMS::MIJ02LMS object
  *
  * @param refVoltage The known reference voltage (e.g. 3.3, 5.0, etc.)
@@ -55,5 +60,16 @@ std::string MIJ02LMS::getSensorType()
  */
 std::string MIJ02LMS::toJSON(const double voltage)
 {
-    return "\"" + this->getSensorType() + "_RAW\":" + std::to_string(voltage) + ", \"UM\":" + std::to_string(this->getUM(voltage));
+    return "\"DENDROMETER_RAW\":" + std::to_string(voltage) + ", \"DENDROMETER\":" + std::to_string(this->calculate(voltage));
+}
+
+/**
+ * @brief Returns the voltage of the sensor
+ *
+ * @param voltage The voltage read from the sensor
+ * @return double The voltage of the sensor
+ */
+double MIJ02LMS::calculate(const double voltage)
+{
+    return getUM(voltage);
 }

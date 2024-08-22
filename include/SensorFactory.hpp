@@ -15,6 +15,11 @@ typedef enum SensorType {
     MIJ02LMS_TYPE
 } SensorType;
 
+/**
+ * @brief Class used to instantiate a factory to configure sensors based on configuration
+ *        found in config.hpp
+ * 
+ */
 class SensorFactory {
 public:
     const std::vector<std::shared_ptr<AnalogSensor>> &getAnalogSensors()
@@ -22,6 +27,10 @@ public:
         return this->analogSensors;
     };
 
+    /**
+     * @brief Initiate sensor ports and create relavent sensor objects for each port
+     * 
+     */
     void begin()
     {
         // read the sensor types from the config file
@@ -30,18 +39,16 @@ public:
         sensorPorts.push_back((SensorType)ANALOG_PORT_2);
         sensorPorts.push_back((SensorType)ANALOG_PORT_3);
 
-        // for (int i = 0; i < 4; i++)
-        // {
-        //     Serial.print("Sensor Port ");
-        //     Serial.print(i);
-        //     Serial.print(": ");
-        //     Serial.println(sensorPorts[i]);
-        // }
-
+        // create the sensor objects
         createAnalogSensors();
     }
 
 protected:
+    /**
+     * @brief Check the sensor configuration and create relevant sensor type for
+     * the corresponding port
+     * 
+     */
     void createAnalogSensors()
     {
         // std::vector<std::shared_ptr<AnalogSensor>> tempSensors;
@@ -72,7 +79,7 @@ protected:
     };
 
     std::vector<std::shared_ptr<AnalogSensor>> analogSensors; // will be list of sensors
-    std::vector<SensorType> sensorPorts;
+    std::vector<SensorType> sensorPorts; // will be list of ports
 };
 
 #endif // SENSOR_FACTORY_HPP

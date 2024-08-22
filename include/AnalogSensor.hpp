@@ -16,6 +16,7 @@
 class AnalogSensor
 {
 public:
+    // the following commented out sections are potential future refactoring (keep)
     // AnalogSensor() {} // Default Constructor (empty)
     // Constructor with parameters: pin, reference voltage, maximum resolution, and sensor type
     // AnalogSensor(const uint8_t pin,

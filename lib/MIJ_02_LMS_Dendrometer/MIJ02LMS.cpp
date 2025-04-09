@@ -60,7 +60,7 @@ std::string MIJ02LMS::getSensorType()
  */
 std::string MIJ02LMS::toJSON(const double voltage)
 {
-    return "\"DENDROMETER_RAW\":" + std::to_string(voltage) + ", \"DENDROMETER\":" + std::to_string(this->calculate(voltage));
+    return "\"VOLTAGE\":" + std::to_string(voltage) + ", \"RADIUS\":" + std::to_string(this->calculate(voltage));
 }
 
 /**

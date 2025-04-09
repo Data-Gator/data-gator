@@ -67,6 +67,7 @@ PubSubClient mqtt_client(wifi_client); //!< MQTT client object
 Preferences gator_prefs; //!< NVS memory object
 
 extern SensorFactory sensorFactory; //!< Sensor factory object
+// const String config_filename = "/analog_config.json";
 
 /**
  * @brief Setup initializes sensor interfaces, NVS, wireless protocols, and logging options.
@@ -101,8 +102,7 @@ void setup(){
     setup_logging();
 
     // initialize the sensor factory
-    sensorFactory = SensorFactory();
-    sensorFactory.begin();
+    sensorFactory.loadAnalogSensors();
 }
 
 

@@ -302,7 +302,7 @@ void ReadWired()
 			if (DEBUG)
 				Serial.println("\tno sensor at port " + String(i));
 		}
-	}
+	} 
 }
 
 /**
